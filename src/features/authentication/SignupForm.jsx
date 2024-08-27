@@ -1,41 +1,89 @@
-import Input from "../../ui/Input";
 import FormLayout from "../../ui/FormLayout";
 import FormRow from "../../ui/FormRow";
 import Button from "../../ui/Button";
+import { useForm } from "react-hook-form";
+import { useSignup } from "./useSignup";
 
 export default function SignupForm() {
+  const { signUp, isSigning } = useSignup();
+
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  function onSubmit({ email, password, fullName }) {
+    signUp(
+      { email, password, fullName },
+      {
+        onSettled: () => {
+          reset();
+        },
+      }
+    );
+  }
+
   return (
     <FormLayout
       title="Create Your
-Vercel Account"
+Code pro Account 🚀"
     >
-      <form>
-        <FormRow>
-          <label htmlFor="fullName" className="text-stone-900 md:text-lg">
-            Full Name
-          </label>
-          <Input id="fullName" type="text" />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormRow label="Full Name" error={errors?.fullName?.message}>
+          <input
+            className="input"
+            id="fullName"
+            type="text"
+            {...register("fullName", {
+              required: "This Field is required",
+            })}
+          />
         </FormRow>
-        <FormRow>
-          <label htmlFor="email" className="text-stone-900 md:text-lg">
-            Email
-          </label>
-          <Input id="email" type="text" />
+        <FormRow label="Email" error={errors?.email?.message}>
+          <input
+            className="input"
+            id="email"
+            type="text"
+            {...register("email", {
+              required: "This Field is required",
+              pattern: {
+                value: /^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+                message: "Enter a valid Email Id",
+              },
+            })}
+          />
         </FormRow>
-        <FormRow>
-          <label htmlFor="password" className="text-stone-900 md:text-lg">
-            Password
-          </label>
-          <Input id="password" type="password" />
+        <FormRow label="Password" error={errors?.password?.message}>
+          <input
+            className="input"
+            id="password"
+            type="password"
+            {...register("password", {
+              required: "This Field is required",
+              minLength: {
+                value: 8,
+                message: "Enter a password minimum length of 8 characters",
+              },
+            })}
+          />
         </FormRow>
-        <FormRow>
-          <label
-            htmlFor="confirmPassword"
-            className="text-stone-900 md:text-lg"
-          >
-            Confirm Password
-          </label>
-          <Input id="confirmPassword" type="password" />
+        <FormRow
+          label="Confirm Password"
+          error={errors?.confirmPassword?.message}
+        >
+          <input
+            id="confirmPassword"
+            type="password"
+            className="input"
+            {...register("confirmPassword", {
+              validate: (value) =>
+                value === getValues().password ||
+                "Confirm Password should match your original password",
+            })}
+          />
         </FormRow>
         <FormRow>
           <Button>Sign up</Button>

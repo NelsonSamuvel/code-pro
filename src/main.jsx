@@ -19,6 +19,7 @@ import ProtectedRoute from "./adminPages/ProtectedRoute.jsx";
 import LoginPage from "./pages/AuthLayout.jsx";
 import AuthLayout from "./pages/AuthLayout.jsx";
 import SignupForm from "./features/authentication/SignupForm.jsx";
+import TipsPage from "./pages/TipsPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,11 +31,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/dashboard" />,
+        element: <Navigate to="/tips" />,
       },
       {
-        path: "/dashboard",
-        element: <DashBoard />,
+        path: "/tips",
+        element: <TipsPage />,
       },
     ],
   },
