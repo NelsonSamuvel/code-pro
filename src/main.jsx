@@ -1,3 +1,4 @@
+//Libraries
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
@@ -11,9 +12,13 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 
+//Pages
 import LoginForm from "./features/authentication/LoginForm.jsx";
 import DashBoard from "./adminPages/DashBoard.jsx";
 import ProtectedRoute from "./adminPages/ProtectedRoute.jsx";
+import LoginPage from "./pages/AuthLayout.jsx";
+import AuthLayout from "./pages/AuthLayout.jsx";
+import SignupForm from "./features/authentication/SignupForm.jsx";
 
 const router = createBrowserRouter([
   {
@@ -34,8 +39,17 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/login",
-    element: <LoginForm />,
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "/signup",
+        element: <SignupForm />,
+      },
+      {
+        path: "/login",
+        element: <LoginForm />,
+      },
+    ],
   },
 ]);
 

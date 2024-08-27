@@ -3,6 +3,8 @@ import Button from "../../ui/Button";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import { useLogin } from "./useLogin";
+import { Link } from "react-router-dom";
+import FormLayout from "../../ui/FormLayout";
 
 function LoginForm() {
   const [email, setEmail] = useState("nelson@gmail.com");
@@ -14,23 +16,22 @@ function LoginForm() {
     e.preventDefault();
     if (!email || !password) return;
 
-    login({ email, password },{
-      onSettled : ()=>{
-        setEmail("");
-        setPassword("")
+    login(
+      { email, password },
+      {
+        onSettled: () => {
+          setEmail("");
+          setPassword("");
+        },
       }
-    });
+    );
   }
 
   return (
-    <div className="w-2/3 md:w-[450px] mx-auto h-dvh mt-24 px-2 py-4">
-      <img src="" alt="" />
-      <h1 className="text-xl md:text-2xl font-semibold text-slate-600">
-        Login Form
-      </h1>
+    <FormLayout title="Login Form">
       <form onSubmit={handleSubmit}>
         <FormRow>
-          <label htmlFor="email" className="text-slate-500 md:text-lg">
+          <label htmlFor="email" className="text-stone-900 md:text-lg">
             Email
           </label>
           <Input
@@ -42,12 +43,12 @@ function LoginForm() {
           />
         </FormRow>
         <FormRow>
-          <label htmlFor="password" className="text-slate-500 md:text-lg">
+          <label htmlFor="password" className="text-stone-900 md:text-lg">
             Password
           </label>
           <Input
             id="password"
-            type ="password"
+            type="password"
             value={password}
             disabled={isLoggingIn}
             onChange={(e) => setPassword(e.target.value)}
@@ -57,7 +58,7 @@ function LoginForm() {
           <Button disabled={isLoggingIn}>Log in</Button>
         </FormRow>
       </form>
-    </div>
+    </FormLayout>
   );
 }
 
