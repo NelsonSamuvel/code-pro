@@ -1,13 +1,12 @@
 import { HiCodeBracket } from "react-icons/hi2";
-import RoundedIcon from "./RoundedIcon";
 
 function Logo() {
   return (
-    <div className="flex justify-center items-center gap-2">
-      <RoundedIcon>
-        <HiCodeBracket className="w-4 h-6 sm:w-6 sm:h-8 fill-slate-200 stroke-2 stroke-slate-200" />
-      </RoundedIcon>
-      <h2 className="text-stone-900 text-lg font-semibold">Code Pro</h2>
+    <div className="flex items-center gap-2">
+      <button className="rounded-icon bg-stone-800">
+        <HiCodeBracket className="custom-icons fill-slate-200 stroke-2 stroke-slate-200" />
+      </button>
+      <h2 className={` text-stone-900 text-lg font-semibold`}>Code Pro</h2>
     </div>
   );
 }

@@ -20,6 +20,7 @@ import LoginPage from "./pages/AuthLayout.jsx";
 import AuthLayout from "./pages/AuthLayout.jsx";
 import SignupForm from "./features/authentication/SignupForm.jsx";
 import TipsPage from "./pages/TipsPage.jsx";
+import { loader as tipsLoader } from "./pages/TipsPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
       {
         path: "/tips",
         element: <TipsPage />,
+        loader: tipsLoader,
       },
     ],
   },
