@@ -1,6 +1,9 @@
+//types
+import { TipsItemType } from "../../types/tips/tips.type";
+
 import { HiOutlineStar } from "react-icons/hi";
 
-export default function TipsItem({ tip }) {
+export default function TipsItem({ tip }: TipsItemType) {
   const { title, content } = tip;
 
   return (

@@ -1,9 +1,16 @@
 import { createContext, useContext } from "react";
 import { useLocation } from "react-router-dom";
 
-const AuthContext = createContext();
+//types
+import { ChildrenType } from "../types/children.type";
 
-export default function AuthLayoutProvider({ children }) {
+interface AuthContextType {
+  isLoginPage: boolean;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export default function AuthLayoutProvider({ children }: ChildrenType) {
   const location = useLocation();
 
   const isLoginPage = location.pathname === "/login";
@@ -15,7 +22,7 @@ export default function AuthLayoutProvider({ children }) {
   );
 }
 
-export function useAuthLayout() {
+export function useAuthLayout(): AuthContextType {
   const context = useContext(AuthContext);
   if (context === undefined)
     throw new Error("value is accessed outside of context");

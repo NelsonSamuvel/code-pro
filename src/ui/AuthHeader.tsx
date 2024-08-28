@@ -10,11 +10,13 @@ function AuthHeader() {
     <header className="flex items-center justify-between p-4">
       <Logo />
       <div className="space-x-4">
-        <Link>
+        <Link to="/">
           <button className="nav-btn">Contact</button>
         </Link>
         <Link to={`/${isLoginPage ? "signup" : "login"}`}>
-          <Button type="secondary">{isLoginPage ? "Sign Up" : "Login"}</Button>
+          <Button type="secondary" disabled={false}>
+            {isLoginPage ? "Sign Up" : "Login"}
+          </Button>
         </Link>
       </div>
     </header>

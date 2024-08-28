@@ -1,5 +1,4 @@
 import Logo from "./Logo";
-import { HiMenu } from "react-icons/hi";
 import MenuBar from "./MenuBar";
 import NavbarList from "./NavbarList";
 

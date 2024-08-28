@@ -14,13 +14,11 @@ import { Toaster } from "react-hot-toast";
 
 //Pages
 import LoginForm from "./features/authentication/LoginForm.jsx";
-import DashBoard from "./adminPages/DashBoard.jsx";
-import ProtectedRoute from "./adminPages/ProtectedRoute.jsx";
-import LoginPage from "./pages/AuthLayout.jsx";
+import ProtectedRoute from "./pages/ProtectedRoute.tsx";
 import AuthLayout from "./pages/AuthLayout.jsx";
 import SignupForm from "./features/authentication/SignupForm.jsx";
-import TipsPage from "./pages/TipsPage.jsx";
-import { loader as tipsLoader } from "./pages/TipsPage.jsx";
+import TipsPage from "./pages/TipsPage.tsx";
+import PageNotFound from "./ui/PageNotFound.jsx";
 
 const router = createBrowserRouter([
   {
@@ -37,9 +35,9 @@ const router = createBrowserRouter([
       {
         path: "/tips",
         element: <TipsPage />,
-        loader: tipsLoader,
       },
     ],
+    errorElement: <PageNotFound />,
   },
   {
     element: <AuthLayout />,

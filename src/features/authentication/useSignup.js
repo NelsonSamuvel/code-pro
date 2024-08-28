@@ -10,7 +10,7 @@ export function useSignup() {
     mutationFn: signUpApi,
     onSuccess: ({ user: { user_metadata: userData } }) => {
       toast.success(`${userData.fullName}! Your account has been created`);
-      navigate("/login",{replace : true});
+      navigate("/login", { replace: true });
     },
     onError: (err) => {
       toast.error(err.message);

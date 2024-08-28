@@ -1,6 +1,9 @@
 import supabase from "./supabase";
 
-export async function signUp({ email, password, fullName }) {
+//types
+import { User } from "../types/api/auth.type";
+
+export async function signUp({ email, password, fullName }: User) {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -16,7 +19,7 @@ export async function signUp({ email, password, fullName }) {
   return data;
 }
 
-export async function login({ email, password }) {
+export async function login({ email, password }: User) {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
@@ -25,6 +28,8 @@ export async function login({ email, password }) {
   if (error) {
     throw new Error("Invalid Email or Password");
   }
+
+  console.log(data);
 
   return data;
 }
@@ -42,7 +47,7 @@ export async function checkAuth() {
   return user.user;
 }
 
-export async function logout() {
+export async function logout(): Promise<void> {
   const { error } = await supabase.auth.signOut();
   if (error) throw new Error("Logout failed");
 }

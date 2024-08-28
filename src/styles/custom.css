@@ -22,3 +22,8 @@
 .active {
   @apply text-red-400;
 }
+
+
+.h1{
+  @apply text-2xl font-semibold
+}
