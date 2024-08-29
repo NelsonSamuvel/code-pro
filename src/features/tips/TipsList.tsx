@@ -11,12 +11,20 @@ import NotFound from "../../ui/NotFound";
 
 import TipsItem from "./TipsItem";
 import { sortByDate } from "../../helpers/utils";
+import { useTips } from "./UseTips";
+import Spinner from "../../ui/Spinner";
 
 type Name = "title" | "created_at";
 type Direction = "asc" | "desc";
 
-function TipsList({ tips }: TipsListType) {
+function TipsList() {
   const { searchTip, sortTip } = useSearch();
+
+  const { tips, isLoading } = useTips();
+
+  if (isLoading) return <Spinner />;
+
+  if (!tips) return <NotFound name="Tips" />;
 
   let filteredTips = tips;
 

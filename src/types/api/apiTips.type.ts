@@ -1,3 +1,11 @@
+export interface ProfilesType {
+  id: number;
+  username: string;
+  avatar: string | null;
+  user_id: string;
+  bio: string;
+}
+
 export interface TipsType {
   category_id: number;
   content: string;
@@ -7,4 +15,5 @@ export interface TipsType {
   title: string;
   updated_at: Date | null;
   user_id: string;
+  profiles: ProfilesType;
 }

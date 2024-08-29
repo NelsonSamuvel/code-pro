@@ -36,8 +36,11 @@ const router = createBrowserRouter([
         path: "/tips",
         element: <TipsPage />,
       },
+      {
+        path: "*",
+        element: <PageNotFound />,
+      },
     ],
-    errorElement: <PageNotFound />,
   },
   {
     element: <AuthLayout />,
