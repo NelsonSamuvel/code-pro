@@ -5,6 +5,7 @@ import { TipsItemType } from "../../types/tips/tips.type";
 import { HiOutlineStar, HiUser } from "react-icons/hi";
 import { format } from "date-fns";
 import { formatDateTime } from "../../helpers/utils";
+import Modal from "../../ui/Modal";
 
 export default function TipsItem({ tip }: TipsItemType) {
   const {
@@ -23,14 +24,12 @@ export default function TipsItem({ tip }: TipsItemType) {
         </div>
         <p className="text-[15px]">{content}</p>
       </div>
-      <div>
-        <div className="text-sm flex items-center justify-between text-slate-600">
-          <div className="flex gap-1 items-center bg-slate-200 pl-2 pr-3 py-1 rounded-full max-w-fit cursor-pointer">
-            <HiUser />
-            <p className="">{username}</p>
-          </div>
-          <p className="italic">{formatDateTime(created_at)}</p>
+      <div className="text-sm flex items-center justify-between text-slate-600">
+        <div className="flex gap-1 items-center bg-slate-200 pl-2 pr-3 py-1 rounded-full max-w-fit cursor-pointer">
+          <HiUser />
+          <p className="">{username}</p>
         </div>
+        <p className="italic">{formatDateTime(created_at)}</p>
       </div>
     </div>
   );

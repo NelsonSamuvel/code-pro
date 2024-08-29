@@ -8,3 +8,11 @@ export async function getTips() {
   if (error) throw new Error("Failed to fetch tips");
   return data;
 }
+
+export async function addTip(newTip: TipsType) {
+  const { data, error } = await supabase.from("tips").insert([newTip]).select();
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}

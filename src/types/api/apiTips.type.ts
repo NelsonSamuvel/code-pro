@@ -9,11 +9,11 @@ export interface ProfilesType {
 export interface TipsType {
   category_id: number;
   content: string;
-  created_at: Date;
-  id: number;
-  image: string;
+  created_at: Date | string;
+  id?: number;
+  image: string | null;
   title: string;
-  updated_at: Date | null;
-  user_id: string;
-  profiles: ProfilesType;
+  updated_at?: Date | null;
+  user_id: string | undefined;
+  profiles?: ProfilesType;
 }
