@@ -4,7 +4,7 @@
 }
 
 .custom-icons {
-  @apply w-4 h-6 sm:w-6 sm:h-8;
+  @apply w-6 h-6 sm:w-6 sm:h-8;
 }
 
 .nav-btn {
@@ -12,7 +12,7 @@
 }
 
 .rounded-icon {
-  @apply inline-block px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full border;
+  @apply inline-block px-2 py-2 sm:px-2.5 sm:py-1.5 rounded-full border hover:bg-stone-100 cursor-pointer;
 }
 
 .btn {
@@ -23,7 +23,6 @@
   @apply text-red-400;
 }
 
-
-.h1{
-  @apply text-2xl font-semibold
+.h1 {
+  @apply text-2xl font-semibold;
 }

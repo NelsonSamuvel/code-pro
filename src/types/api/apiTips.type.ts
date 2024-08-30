@@ -15,5 +15,5 @@ export interface TipsType {
   title: string;
   updated_at?: Date | null;
   user_id: string | undefined;
-  profiles?: ProfilesType;
+  profiles: ProfilesType;
 }

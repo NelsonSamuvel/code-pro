@@ -18,7 +18,7 @@ type Name = "title" | "created_at";
 type Direction = "asc" | "desc";
 
 function TipsList() {
-  const { searchTip, sortTip } = useSearch();
+  const { searchTip, sortTip, view } = useSearch();
 
   const { tips, isLoading } = useTips();
 
@@ -66,10 +66,15 @@ function TipsList() {
 
   console.log(filteredTips);
 
+  const gridView =
+    view === "grid"
+      ? "grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4"
+      : "";
+
   return (
     <>
       {!filteredTips.length && <NotFound name="Tips" />}
-      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
+      <ul className={`${gridView}`}>
         {filteredTips.map((tip) => (
           <TipsItem key={tip.id} tip={tip} />
         ))}

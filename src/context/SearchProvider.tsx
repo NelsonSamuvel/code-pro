@@ -8,6 +8,8 @@ interface SearchContextType {
   updateSearchTip: (value: string) => void;
   sortTip: string;
   updateSortTip: (value: string) => void;
+  view: string;
+  updateView: (value: string) => void;
 }
 
 const SearchContext = createContext<SearchContextType | undefined>(undefined);
@@ -15,6 +17,7 @@ const SearchContext = createContext<SearchContextType | undefined>(undefined);
 export default function SearchProvider({ children }: ChildrenType) {
   const [searchTip, setSearchTip] = useState<string>("");
   const [sortTip, setSortTip] = useState<string>("title-asc");
+  const [view, setView] = useState<string>("grid");
 
   function updateSearchTip(value: string) {
     setSearchTip(value);
@@ -24,10 +27,20 @@ export default function SearchProvider({ children }: ChildrenType) {
     setSortTip(value);
   }
 
+  function updateView(viewType: string): void {
+    setView(viewType);
+  }
 
   return (
     <SearchContext.Provider
-      value={{ searchTip, updateSearchTip, sortTip, updateSortTip }}
+      value={{
+        searchTip,
+        updateSearchTip,
+        sortTip,
+        updateSortTip,
+        view,
+        updateView,
+      }}
     >
       {children}
     </SearchContext.Provider>

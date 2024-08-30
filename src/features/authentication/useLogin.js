@@ -8,7 +8,7 @@ export function useLogin() {
 
   const { mutate: login, isLoggingIn } = useMutation({
     mutationFn: loginApi,
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast.success("Logged in successfully");
       navigate("/tips", { replace: true });
     },

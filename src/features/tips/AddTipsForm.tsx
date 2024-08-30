@@ -9,6 +9,7 @@ import { useCategories } from "./useCategories";
 import { format } from "date-fns";
 import { useAuth } from "../authentication/useAuth";
 import { useAddTip } from "./useAddTip";
+import { HiXMark } from "react-icons/hi2";
 
 function AddTipsForm({ onCloseModal }) {
   const { categories, isLoading } = useCategories();
@@ -32,8 +33,6 @@ function AddTipsForm({ onCloseModal }) {
       user_id: user?.id,
     };
 
-    console.log(newTip);
-
     addTip(newTip, {
       onSuccess: () => {
         onCloseModal();
@@ -42,28 +41,37 @@ function AddTipsForm({ onCloseModal }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-slate-400/20 backdrop-blur-sm">
-      <FormLayout title="Add New Tip" type="modal">
-        <form onSubmit={handleSubmit}>
-          <FormRow label="Title">
-            <input
-              className="input"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              type="text"
-              id="title"
-            />
-          </FormRow>
+    // <FormLayout title="Add New Tip" type="modal">
+    <form onSubmit={handleSubmit}>
+      <div className="flex items-center justify-between">
+        <h1 className="text-lg font-semibold tracking-wider">Add New Tip</h1>
+        <button className="rounded-icon" onClick={() => onCloseModal()}>
+          <HiXMark className="custom-icons" />
+        </button>
+      </div>
+      <>
+        <FormRow label="Title">
+          <input
+            className="input"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            type="text"
+            id="title"
+          />
+        </FormRow>
 
-          <FormRow label="Content">
-            <textarea
-              className="input h-32"
-              id="content"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
-          </FormRow>
-          <FormRow label="Choose Language">
+        <FormRow label="Content">
+          <textarea
+            className="input h-32"
+            id="content"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+        </FormRow>
+        <FormRow label="Choose Language">
+          {isLoading ? (
+            <SpinnerMini />
+          ) : (
             <Dropdown
               isHide={false}
               name="language"
@@ -74,13 +82,14 @@ function AddTipsForm({ onCloseModal }) {
                 []
               )}
             />
-          </FormRow>
-          <FormRow>
-            <Button disabled={false}>Add</Button>
-          </FormRow>
-        </form>
-      </FormLayout>
-    </div>
+          )}
+        </FormRow>
+        <FormRow>
+          <Button disabled={false}>Add</Button>
+        </FormRow>
+      </>
+    </form>
+    // </FormLayout>
   );
 }
 
