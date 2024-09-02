@@ -15,7 +15,7 @@ export default function TipsItem({ tip }: TipsItemType) {
   const isCurrentUser = user?.id === profiles.user_id;
 
   return (
-    <div className="mt-4 border p-4 flex flex-col gap-4 justify-between shadow-md">
+    <div className="mt-4 border p-4 flex flex-col gap-4 justify-between shadow-md cursor-pointer">
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2 justify-between">
           <h1 className="text-base font-semibold ">{title}</h1>

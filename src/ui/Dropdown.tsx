@@ -1,13 +1,13 @@
-interface optionType {
+export interface OptionType {
   label: string;
-  value: string;
+  value: number | string;
 }
 
 interface DropDownType {
-  options: optionType[];
+  options: OptionType[];
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   name: string;
-  value: string | number | undefined;
+  value: string | number;
   isHide: boolean;
 }
 

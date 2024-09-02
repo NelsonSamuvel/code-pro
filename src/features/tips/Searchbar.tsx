@@ -2,12 +2,19 @@ import { HiSearch } from "react-icons/hi";
 import { HiEllipsisHorizontal, HiMiniPlus } from "react-icons/hi2";
 import Dropdown from "../../ui/Dropdown";
 import { useSearch } from "../../context/SearchProvider";
-import Modal from "../../ui/Modal";
+import Modal from "../../ui/Modal.jsx";
 import AddTipsForm from "./AddTipsForm";
 import LayoutOptions from "../../ui/LayoutOptions";
 
 export default function Searchbar() {
-  const { searchTip, updateSearchTip, sortTip, updateSortTip,updateView,view } = useSearch();
+  const {
+    searchTip,
+    updateSearchTip,
+    sortTip,
+    updateSortTip,
+    updateView,
+    view,
+  } = useSearch();
 
   return (
     <Modal>
@@ -21,7 +28,7 @@ export default function Searchbar() {
             onChange={(e) => updateSearchTip(e.target.value)}
           />
           <HiSearch className="h-5 w-5 stroke-slate-500 fill-slate-500 absolute top-[11px] left-2" />
-          <button className="absolute top-[11px] right-2">
+          <button className="absolute top-[11px] right-2 ">
             <HiEllipsisHorizontal className="h-5 w-5  stroke-slate-500 fill-slate-500 " />
           </button>
         </div>
@@ -37,7 +44,7 @@ export default function Searchbar() {
             { label: "Sort by earlier first", value: "created_at-asc" },
           ]}
         />
-        <LayoutOptions view={view} updateView={updateView}/>
+        <LayoutOptions view={view} updateView={updateView} />
         <Modal.Open opens="add">
           <button className="btn py-2.5 sm:py-2 rounded-md px-2.5">
             <HiMiniPlus className="sm:hidden" />
@@ -45,7 +52,7 @@ export default function Searchbar() {
           </button>
         </Modal.Open>
         <Modal.Window name="add">
-          <AddTipsForm/>
+          <AddTipsForm />
         </Modal.Window>
       </div>
     </Modal>
