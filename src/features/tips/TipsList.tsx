@@ -6,13 +6,15 @@ import {
   subDays,
 } from "date-fns";
 import { useSearch } from "../../context/SearchProvider";
-import { TipsListType } from "../../types/tips/tips.type";
+
 import NotFound from "../../ui/NotFound";
 
 import TipsItem from "./TipsItem";
 import { sortByDate } from "../../helpers/utils";
 import { useTips } from "./UseTips";
 import Spinner from "../../ui/Spinner";
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
 type Name = "title" | "created_at";
 type Direction = "asc" | "desc";
@@ -22,11 +24,22 @@ function TipsList() {
 
   const { tips, isLoading } = useTips();
 
+  console.log(tips);
+
+  const [searchParams] = useSearchParams();
+
   if (isLoading) return <Spinner />;
 
   if (!tips) return <NotFound name="Tips" />;
 
+  const categoryVal = searchParams.get("category") || "all";
   let filteredTips = tips;
+
+  if (categoryVal !== "all") {
+    filteredTips = filteredTips.filter(
+      (tip) => tip.categories.name === categoryVal
+    );
+  }
 
   if (searchTip.length > 2) {
     filteredTips = tips.filter(
@@ -63,8 +76,6 @@ function TipsList() {
         ? filteredTips.sort((a, b) => a[name].localeCompare(b[name]))
         : filteredTips.sort((a, b) => b[name].localeCompare(a[name]));
   }
-
-  console.log(filteredTips);
 
   const gridView =
     view === "grid"

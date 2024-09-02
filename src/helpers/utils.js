@@ -12,3 +12,7 @@ export function formatDateTime(created_at) {
     .join(":")} ${dateArr.slice(-1)}`;
   return finalDate;
 }
+
+export function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
