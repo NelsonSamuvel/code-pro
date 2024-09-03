@@ -2,9 +2,10 @@ interface btnType {
   children: string;
   disabled: boolean;
   type?: string;
+  onClick: () => void;
 }
 
-function Button({ children, disabled, type = "primary" }: btnType) {
+function Button({ children, disabled, onClick, type = "primary" }: btnType) {
   const btnStyles: any = {
     primary:
       "bg-stone-900 p-2 text-white rounded-sm text-lg hover:bg-stone-800",
@@ -13,7 +14,7 @@ function Button({ children, disabled, type = "primary" }: btnType) {
   };
 
   return (
-    <button disabled={disabled} className={btnStyles[type]}>
+    <button disabled={disabled} className={btnStyles[type]} onClick={onClick}>
       {children}
     </button>
   );

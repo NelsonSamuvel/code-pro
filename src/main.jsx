@@ -19,13 +19,16 @@ import AuthLayout from "./pages/AuthLayout.jsx";
 import SignupForm from "./features/authentication/SignupForm.jsx";
 import TipsPage from "./pages/TipsPage.tsx";
 import PageNotFound from "./ui/PageNotFound.jsx";
-
+import AccountPage from "./pages/AccountPage.tsx";
+import { MenuProvider } from "./context/MenuProvider.tsx";
 const router = createBrowserRouter([
   {
     element: (
-      <ProtectedRoute>
-        <App />
-      </ProtectedRoute>
+      <MenuProvider>
+        <ProtectedRoute>
+          <App />
+        </ProtectedRoute>
+      </MenuProvider>
     ),
     children: [
       {
@@ -35,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/tips",
         element: <TipsPage />,
+      },
+      {
+        path: "/account",
+        element: <AccountPage />,
       },
       {
         path: "*",

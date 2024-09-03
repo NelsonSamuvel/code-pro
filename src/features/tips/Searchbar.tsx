@@ -46,9 +46,11 @@ export default function Searchbar() {
         />
         <LayoutOptions view={view} updateView={updateView} />
         <Modal.Open opens="add">
-          <button className="btn py-2.5 sm:py-2 rounded-md px-2.5">
+          <button className="btn py-2.5 sm:py-2.5 md:py-2 rounded-md px-2.5">
             <HiMiniPlus className="sm:hidden" />
-            <p className="hidden sm:block  text-sm font-semibold">Add New </p>
+            <p className="hidden sm:block  text-sm sm:text-[12px] md:text-[14px] font-semibold">
+              Add New{" "}
+            </p>
           </button>
         </Modal.Open>
         <Modal.Window name="add">

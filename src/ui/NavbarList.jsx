@@ -1,9 +1,12 @@
 import { NavLink } from "react-router-dom";
 import Button from "./Button";
+import { useMenu } from "../context/MenuProvider";
 
 export default function NavbarList() {
+  const { handleMenu } = useMenu();
+
   return (
-    <div className="space-x-4 hidden sm:block">
+    <div className="space-x-4 hidden sm:block relative">
       <NavLink
         to="/tips"
         className={({ isActive }) =>
@@ -24,7 +27,9 @@ export default function NavbarList() {
       >
         <button className="nav-btn">Contact</button>
       </NavLink>
-      <Button type="secondary">Profile</Button>
+      <Button type="secondary" onClick={handleMenu}>
+        Profile
+      </Button>
     </div>
   );
 }

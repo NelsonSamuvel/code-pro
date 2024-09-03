@@ -15,6 +15,7 @@ import { useTips } from "./UseTips";
 import Spinner from "../../ui/Spinner";
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
+import { getCategoryPerTip } from "../../services/apiCategories";
 
 type Name = "title" | "created_at";
 type Direction = "asc" | "desc";
@@ -24,9 +25,8 @@ function TipsList() {
 
   const { tips, isLoading } = useTips();
 
-  console.log(tips);
-
   const [searchParams] = useSearchParams();
+
 
   if (isLoading) return <Spinner />;
 
