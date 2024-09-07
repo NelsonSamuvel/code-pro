@@ -1,7 +1,6 @@
 import { HiCog6Tooth, HiMiniRectangleGroup, HiMiniSquare3Stack3D, HiMiniUserGroup } from "react-icons/hi2";
 import Logo from "./Logo";
 import SidebarRow from "./SidebarRow";
-import { NavLink } from "react-router-dom";
 
 function Sidebar() {
   return (

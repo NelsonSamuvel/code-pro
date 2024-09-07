@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Geist Sans", "sans-serif"],
+        sans: ["Poppins", "sans-serif"],
+        outfit: ["Outfit", "system-ui"],
       },
     },
   },

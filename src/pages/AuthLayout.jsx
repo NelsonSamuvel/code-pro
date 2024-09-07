@@ -1,4 +1,4 @@
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import AuthLayoutProvider from "../context/AuthLayoutProvider";
 import AuthOption from "../features/authentication/AuthOption";
 import AuthHeader from "../ui/AuthHeader";

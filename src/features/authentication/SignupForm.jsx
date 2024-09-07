@@ -61,6 +61,7 @@ Code pro Account 🚀"
             className="input"
             id="password"
             type="password"
+            disabled={isSigning}
             {...register("password", {
               required: "This Field is required",
               minLength: {
@@ -77,6 +78,7 @@ Code pro Account 🚀"
           <input
             id="confirmPassword"
             type="password"
+            disabled={isSigning}
             className="input"
             {...register("confirmPassword", {
               validate: (value) =>
@@ -86,7 +88,7 @@ Code pro Account 🚀"
           />
         </FormRow>
         <FormRow>
-          <Button>Sign up</Button>
+          <Button disabled={isSigning}>Sign up</Button>
         </FormRow>
       </form>
     </FormLayout>

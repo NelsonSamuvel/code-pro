@@ -1,24 +1,41 @@
 .input {
-  @apply border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-stone-700 focus:ring-offset-1 focus:shadow-md
+  @apply border border-slate-300 rounded-lg px-3 h-10 focus:outline-none focus:ring-1 focus:ring-stone-700 focus:ring-offset-1 focus:shadow-md
     text-stone-700;
 }
 
 .custom-icons {
-  @apply w-4 h-6 sm:w-6 sm:h-8;
+  @apply w-6 h-6 sm:w-6 sm:h-8;
 }
 
 .nav-btn {
   @apply text-stone-600 text-[16px] sm:text-[17px] hover:text-stone-900;
 }
 
+.logo {
+  @apply inline-block px-2 py-2 sm:px-2.5 sm:py-1.5 rounded-full border bg-stone-800;
+}
+
 .rounded-icon {
-  @apply inline-block px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full border;
+  @apply inline-block px-2 py-2 sm:px-2.5 sm:py-1.5 rounded-full border hover:bg-stone-100 cursor-pointer;
 }
 
 .btn {
-  @apply bg-stone-900 p-2 text-white rounded-sm text-lg;
+  @apply bg-stone-800 p-2 text-white rounded-sm text-lg;
 }
 
 .active {
   @apply text-red-400;
+}
+
+.h1 {
+  @apply text-2xl font-semibold;
+}
+
+
+.textarea{
+  @apply h-20 py-2
+}
+
+.disabled-input{
+  @apply disabled:bg-gray-200 disabled:border-none
 }
