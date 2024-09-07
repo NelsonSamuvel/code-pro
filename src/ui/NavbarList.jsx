@@ -27,7 +27,7 @@ export default function NavbarList() {
       >
         <button className="nav-btn">Contact</button>
       </NavLink>
-      <Button type="secondary" onClick={handleMenu}>
+      <Button type="secondary" onClick={handleMenu} id="nav-btn">
         Profile
       </Button>
     </div>

@@ -12,13 +12,13 @@ export async function getCategories(): Promise<CategoriesType[]> {
   return data;
 }
 
-export async function getCategoryPerTip() {
-  const { data: categories, error } = await supabase.from("categories").select(`
-    name,
-    tips (
-      *
-    )
-  `);
-  console.log(categories);
-  return categories;
-}
+// export async function getCategoryPerTip() {
+//   const { data: categories, error } = await supabase.from("categories").select(`
+//     name,
+//     tips (
+//       *
+//     )
+//   `);
+//   console.log(categories);
+//   return categories;
+// }

@@ -7,14 +7,16 @@ export default function MenuBar() {
   const { isMenuOpen, handleMenu } = useMenu();
 
   return (
-    <div className="space-x-4 block sm:hidden">
-      <button className="rounded-icon" onClick={handleMenu}>
-        {!isMenuOpen ? (
+    <div className="block sm:hidden">
+      {!isMenuOpen ? (
+        <button className="rounded-icon" onClick={handleMenu} id="nav-btn">
           <HiMenu className="custom-icons" />
-        ) : (
+        </button>
+      ) : (
+        <button className="rounded-icon" onClick={handleMenu} id="nav-btn">
           <HiXMark className="custom-icons" />
-        )}
-      </button>
+        </button>
+      )}
     </div>
   );
 }

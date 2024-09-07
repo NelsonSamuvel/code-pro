@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import Button from "../../ui/Button";
 import FormRow from "../../ui/FormRow";
 
@@ -11,10 +11,8 @@ function LoginForm() {
 
   const { login, isLoggingIn } = useLogin();
 
-  function handleSubmit(e) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!email || !password) return;
-
     login(
       { email, password },
       {
@@ -31,7 +29,7 @@ function LoginForm() {
       <form onSubmit={handleSubmit}>
         <FormRow label="Email">
           <input
-            className="input"
+            className="input disabled-input"
             type="text"
             id="email"
             value={email}
@@ -42,7 +40,7 @@ function LoginForm() {
 
         <FormRow label="Password">
           <input
-            className="input"
+            className="input disabled-input"
             id="password"
             type="password"
             value={password}

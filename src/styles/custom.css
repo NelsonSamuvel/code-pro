@@ -30,3 +30,12 @@
 .h1 {
   @apply text-2xl font-semibold;
 }
+
+
+.textarea{
+  @apply h-20 py-2
+}
+
+.disabled-input{
+  @apply disabled:bg-gray-200 disabled:border-none
+}

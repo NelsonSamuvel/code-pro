@@ -7,8 +7,6 @@ type ChildrenType = {
 const useMenuContext = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
-  console.log(isMenuOpen);
-
   function handleMenu() {
     setMenuOpen((menu) => !menu);
   }

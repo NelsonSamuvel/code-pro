@@ -13,7 +13,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 
 //Pages
-import LoginForm from "./features/authentication/LoginForm.jsx";
+import LoginForm from "./features/authentication/LoginForm.tsx";
 import ProtectedRoute from "./pages/ProtectedRoute.tsx";
 import AuthLayout from "./pages/AuthLayout.jsx";
 import SignupForm from "./features/authentication/SignupForm.jsx";

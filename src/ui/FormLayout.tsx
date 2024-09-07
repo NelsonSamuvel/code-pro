@@ -1,7 +1,9 @@
+import { ReactElement } from "react";
+
 interface FormLayoutType {
   title: string;
-  children: React.ReactNode;
-  type: string;
+  children: ReactElement | ReactElement[];
+  type?: string;
 }
 
 function FormLayout({ title, children, type = "primary" }: FormLayoutType) {

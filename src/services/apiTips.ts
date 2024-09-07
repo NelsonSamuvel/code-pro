@@ -1,7 +1,17 @@
 import supabase from "./supabase";
+import { ProfilesType } from "../types/api/apiTips.type";
 
-//Types
-import { TipsType } from "../types/api/apiTips.type";
+export interface TipsType {
+  category_id: number;
+  content: string;
+  created_at: Date | string;
+  id?: number;
+  image: string | null;
+  title: string;
+  updated_at?: Date | null;
+  user_id: string | undefined;
+  profiles?: ProfilesType;
+}
 
 export async function getTips() {
   const { data, error } = await supabase
@@ -11,21 +21,14 @@ export async function getTips() {
   return data;
 }
 
-export async function addTip(newTip: TipsType) {
-  const { data, error } = await supabase.from("tips").insert([newTip]).select();
+export async function addTip(newTip: TipsType): Promise<TipsType> {
+  const { data, error } = await supabase
+    .from("tips")
+    .insert([newTip])
+    .select()
+    .single();
 
   if (error) throw new Error(error.message);
 
   return data;
 }
-
-// export async function getSingleCategoryTip(id: number) {
-//   const { data, error } = await supabase
-//     .from("tips")
-//     .select("*")
-//     .eq("category_id", id);
-
-//   if (error) throw new Error(error.message);
-
-//   return data;
-// }

@@ -6,14 +6,14 @@ import toast from "react-hot-toast";
 export function useLogin() {
   const navigate = useNavigate();
 
-  const { mutate: login, isLoggingIn } = useMutation({
+  const { mutate: login, isPending: isLoggingIn } = useMutation({
     mutationFn: loginApi,
     onSuccess: () => {
       toast.success("Logged in successfully");
       navigate("/tips", { replace: true });
     },
     onError: (err) => {
-      console.log(err.message);
+      toast.error(err.message)
     },
   });
 
