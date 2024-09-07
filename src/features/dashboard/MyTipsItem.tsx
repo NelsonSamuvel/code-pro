@@ -18,7 +18,7 @@ const MyTipsItem = ({ tip, category }: PropsType) => {
     <li className="border mt-4 p-4 divide-y-2 divide-opacity-35 divide-stone-400 relative">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2 justify-between grow">
-          <h2 className="">{tip.title}</h2>
+          <h2 className="h2">{tip.title}</h2>
           <p className="tag mr-4">{category.name}</p>
         </div>
         <Menu.Open selectedId={tip.id}>

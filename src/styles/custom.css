@@ -32,11 +32,11 @@
 }
 
 .h2 {
-  @apply text-base font-semibold;
+  @apply text-[17px] font-semibold;
 }
 
 .tag {
-  @apply  bg-blue-100 text-[14px] text-blue-700 inline-block mt-2  px-3 py-1.5 rounded-full;
+  @apply  bg-blue-100 text-[13px] text-blue-700 inline-block mt-2  px-3 py-1.5 rounded-full;
 }
 
 .textarea {
