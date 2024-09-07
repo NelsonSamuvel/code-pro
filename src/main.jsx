@@ -21,6 +21,7 @@ import TipsPage from "./pages/TipsPage.tsx";
 import PageNotFound from "./ui/PageNotFound.jsx";
 import AccountPage from "./pages/AccountPage.tsx";
 import { MenuProvider } from "./context/MenuProvider.tsx";
+import Dashboard from "./pages/Dashboard.tsx";
 const router = createBrowserRouter([
   {
     element: (
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/tips",
         element: <TipsPage />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
       },
       {
         path: "/account",
