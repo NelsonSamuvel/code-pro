@@ -22,7 +22,10 @@ const MyTipsItem = ({ tip, category }: PropsType) => {
           <p className="tag mr-4">{category.name}</p>
         </div>
         <Menu.Open selectedId={tip.id}>
-          <div className="hover:bg-slate-50 rounded-full p-2 cursor-pointer">
+          <div
+            className="hover:bg-slate-50 rounded-full p-2 cursor-pointer"
+          
+          >
             <HiEllipsisHorizontal className="custom-icons" />
           </div>
         </Menu.Open>

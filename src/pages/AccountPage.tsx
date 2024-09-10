@@ -20,10 +20,10 @@ const AccountPage = () => {
 
   // console.log(profile);
   return (
-    <section className="max-w-5xl mx-auto">
+    <section className="lg:max-w-5xl  mx-auto">
       <div className="flex justify-between gap-4">
         <ProfileForm profile={profile} user={user} />
-        <div className="relative">
+        <div className="relative hidden md:block">
           <img src={authImg} alt="auth-img" className="object-fit w-[400px] h-[400px] mt-24 rounded-md" />
           {/* <img src={authImg2} alt="auth-img" className="object-fit w-[400px] h-[400px] mt-24 rounded-md absolute -top-24 -z-10 -right-24" /> */}
 

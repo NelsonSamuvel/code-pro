@@ -5,6 +5,8 @@ import {
   MouseEvent,
   useContext,
   useState,
+  useEffect,
+  useRef,
 } from "react";
 import { ChildrenType } from "../types/children.type";
 import { useOutsideClick } from "../hooks/useOutsideClick";
@@ -69,7 +71,7 @@ function Window({ id, children }: MenuWindowType & ChildrenType) {
   return (
     <div
       ref={ref}
-      className="text-right space-y-4 border bg-white p-2  shadow-md absolute right-4 top-14 z-10"
+      className=" border bg-white p-2  shadow-md absolute right-4 top-14 z-10"
     >
       {children}
     </div>

@@ -1,6 +1,6 @@
 const MyTipsMenu = () => {
   return (
-    <>
+    <ul className="text-right space-y-4">
       <li>
         <button className="hover:bg-green-500 px-2 py-1 hover:text-white w-full sm:btn sm:bg-green-500">
           Edit
@@ -11,7 +11,7 @@ const MyTipsMenu = () => {
           Delete
         </button>
       </li>
-    </>
+    </ul>
   );
 };
 

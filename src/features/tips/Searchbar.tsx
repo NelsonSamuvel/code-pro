@@ -5,8 +5,11 @@ import { useSearch } from "../../context/SearchProvider";
 import Modal from "../../ui/Modal.jsx";
 import AddTipsForm from "./AddTipsForm";
 import LayoutOptions from "../../ui/LayoutOptions";
+import { useEffect, useState } from "react";
 
 export default function Searchbar() {
+  const [isHideFilters, setHideFilters] = useState(true);
+
   const {
     searchTip,
     updateSearchTip,
@@ -16,10 +19,14 @@ export default function Searchbar() {
     view,
   } = useSearch();
 
+  useEffect(() => {
+    setHideFilters(true);
+  }, [sortTip]);
+
   return (
     <Modal>
       <div className="flex items-center gap-2">
-        <div className="relative grow">
+        <div className="relative grow overflow-hidden">
           <input
             type="text"
             className="input pl-10 w-full"
@@ -28,13 +35,20 @@ export default function Searchbar() {
             onChange={(e) => updateSearchTip(e.target.value)}
           />
           <HiSearch className="h-5 w-5 stroke-slate-500 fill-slate-500 absolute top-[11px] left-2" />
-          <button className="absolute top-[11px] right-2 ">
-            <HiEllipsisHorizontal className="h-5 w-5  stroke-slate-500 fill-slate-500 " />
+          <div className="absolute top-0 right-0 hover:bg-stone-200 rounded-md w-10 h-12 text-center cursor-pointer">
+          <button
+            className="absolute top-2.5 right-3"
+            onClick={() => setHideFilters((prev) => !prev)}
+          >
+            <HiEllipsisHorizontal className="h-5 w-5 sm:hidden  stroke-slate-500 fill-slate-500 " />
           </button>
+          </div>
         </div>
 
         <Dropdown
-          isHide={true}
+          type="xs"
+          isHide={isHideFilters}
+          updateSortTip={updateSortTip}
           name="sort"
           value={sortTip}
           onChange={(e) => updateSortTip(e.target.value)}
