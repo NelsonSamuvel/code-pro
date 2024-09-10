@@ -4,6 +4,7 @@ import { formatDateTime } from "../../helpers/utils";
 import Modal from "../../ui/Modal";
 import MyTipsMenu from "./MyTipsMenu";
 import Menu from "../../ui/Menu";
+import { useState } from "react";
 
 type PropsType = {
   tip: TipsType;
@@ -14,18 +15,20 @@ type PropsType = {
 };
 
 const MyTipsItem = ({ tip, category }: PropsType) => {
+
+
   return (
     <li className="border mt-4 p-4 divide-y-2 divide-opacity-35 divide-stone-400 relative">
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center gap-2 justify-between grow">
+      <div className="flex items-center justify-between mb-2 flex-wrap gap-4">
+        <div className="flex items-center gap-4">
           <h2 className="h2">{tip.title}</h2>
-          <p className="tag mr-4">{category.name}</p>
+          <p className="tag m-0 mr-4">{category.name}</p>
         </div>
+
+        <MyTipsMenu />
+
         <Menu.Open selectedId={tip.id}>
-          <div
-            className="hover:bg-slate-50 rounded-full p-2 cursor-pointer"
-          
-          >
+          <div className="hover:bg-slate-50 rounded-full p-2 cursor-pointer sm:hidden">
             <HiEllipsisHorizontal className="custom-icons" />
           </div>
         </Menu.Open>
