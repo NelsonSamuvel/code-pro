@@ -20,7 +20,7 @@ const MenuPage = () => {
   const { handleMenu } = useMenu();
 
   const ref = useOutsideClick(handleMenu);
-  
+
   function handleNavigateBtn(path: string) {
     handleMenu();
     navigate(path);

@@ -32,3 +32,16 @@ export async function addTip(newTip: TipsType): Promise<TipsType> {
 
   return data;
 }
+
+export async function getMyTips(user_id: string) {
+  const { data, error } = await supabase
+    .from("tips")
+    .select("*, category : categories(id,name)")
+    .eq("user_id", user_id);
+
+  if (error) throw new Error(error.message);
+
+  console.log(data);
+
+  return data;
+}

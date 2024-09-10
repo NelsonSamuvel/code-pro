@@ -31,11 +31,18 @@
   @apply text-2xl font-semibold;
 }
 
-
-.textarea{
-  @apply h-20 py-2
+.h2 {
+  @apply text-[17px] font-semibold;
 }
 
-.disabled-input{
-  @apply disabled:bg-gray-200 disabled:border-none
+.tag {
+  @apply  bg-blue-100 text-[13px] text-blue-700 inline-block mt-2  px-3 py-1.5 rounded-full;
+}
+
+.textarea {
+  @apply h-20 py-2;
+}
+
+.disabled-input {
+  @apply disabled:bg-gray-200 disabled:border-none;
 }

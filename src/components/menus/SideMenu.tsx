@@ -8,14 +8,14 @@ export type MenuPropsType = {
 
 const SideMenu = ({ onNavigate }: MenuPropsType) => {
   const btnStyles = ({ isActive }: ActiveType): string =>
-    isActive ? "bg-stone-100 w-[100%] sm:hidden" : "sm:hidden w-[100%]";
+    isActive ? "bg-stone-200 w-[100%] sm:hidden" : "sm:hidden w-[100%]";
 
   return (
     <>
       <NavLink to="/tips" className={btnStyles}>
         <button
           onClick={() => onNavigate("/tips")}
-          className="hover:bg-stone-100 hover:font-semibold text-[17px] sm:text-base text-stone-500 py-2 px-1  text-start w-full"
+          className=" hover:bg-stone-100 hover:font-semibold text-[17px] sm:text-base text-stone-500 py-2 px-2  text-start w-full"
         >
           Tips
         </button>
@@ -23,7 +23,7 @@ const SideMenu = ({ onNavigate }: MenuPropsType) => {
       <NavLink to="/contact" className={btnStyles}>
         <button
           onClick={() => onNavigate("/contact")}
-          className="hover:bg-stone-100 hover:font-semibold text-[17px] sm:text-base text-stone-500 py-2 px-1  text-start w-full"
+          className="hover:bg-stone-100 hover:font-semibold text-[17px] sm:text-base text-stone-500 py-2 px-2  text-start w-full"
         >
           Contact
         </button>

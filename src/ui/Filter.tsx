@@ -34,7 +34,7 @@ function Filter({ options }: OptionsType) {
           className={`${option.value == catVal && curCategoryStyle} ${""}`}
         >
           <button
-            className="hover:bg-slate-200 px-2 py-1 rounded-sm"
+            className="hover:bg-stone-200 px-2 py-1 rounded-sm"
             key={option.value}
             onClick={() => handleClick(option.value as string)}
           >

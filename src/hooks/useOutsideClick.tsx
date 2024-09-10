@@ -2,17 +2,21 @@ import { useEffect, useRef } from "react";
 
 type CloseProp = () => void;
 type EventProp = boolean | undefined;
-type eventIdType = string;
+
+type RefType = {
+  current: HTMLDivElement  | null;
+};
 
 export function useOutsideClick(
   close: CloseProp,
   eventPhase: EventProp = true
 ) {
-  const ref = useRef<HTMLDivElement | null>(null);
+  const ref: RefType = useRef(null);
 
   useEffect(() => {
     function handleClick(this: Document, e: MouseEvent) {
       const target = e.target as HTMLElement;
+      console.log(target);
       if (
         ref?.current &&
         !ref.current.contains(target as Node) &&
