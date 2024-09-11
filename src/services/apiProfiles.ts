@@ -15,8 +15,6 @@ export async function getProfile(id: string): Promise<ProfilesType> {
     .eq("user_id", id)
     .single();
 
-  console.log(data);
-
   if (error) throw new Error(error.message);
   return data;
 }

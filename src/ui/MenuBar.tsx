@@ -1,10 +1,13 @@
-import { useContext } from "react";
-import { HiMenu, HiXCircle } from "react-icons/hi";
-import { HiXMark } from "react-icons/hi2";
-import MenuContext, { useMenu } from "../context/MenuProvider";
 
-export default function MenuBar() {
-  const { isMenuOpen, handleMenu } = useMenu();
+import { HiMenu } from "react-icons/hi";
+import { HiXMark } from "react-icons/hi2";
+
+type PropsType = {
+  isMenuOpen : boolean,
+  handleMenu : ()=>void;
+}
+
+export default function MenuBar({isMenuOpen,handleMenu}:PropsType) {
 
   return (
     <div className="block sm:hidden">

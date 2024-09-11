@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "./Logo";
 import Button from "./Button";
-import { useAuthLayout } from "../context/AuthLayoutProvider";
+
 
 function AuthHeader() {
-  const { isLoginPage } = useAuthLayout();
+  const location = useLocation();
+
+  const isLoginPage = location.pathname === "/login";
 
   return (
     <header className="flex items-center justify-between p-4">

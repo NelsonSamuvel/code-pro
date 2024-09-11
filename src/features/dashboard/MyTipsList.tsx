@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import Menu from "../../ui/Menu";
 import Spinner from "../../ui/Spinner";
 import { useAuth } from "../authentication/useAuth";
@@ -9,11 +10,9 @@ const MyTipsList = () => {
 
   const { myTips, isLoading } = useMyTips(user?.id as string);
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return createPortal(<Spinner />, document.body);
 
-  if (!myTips) return;
-
-  console.log(myTips);
+  if (!myTips) return null;
 
   return (
     <Menu>

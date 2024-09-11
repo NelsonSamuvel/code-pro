@@ -19,9 +19,11 @@ function AddTipsForm({ onCloseModal }: onCloseProp) {
   const { user } = useAuth();
   const { addTip, isAdding } = useAddTip();
 
-  const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useState<string>("");
-  const [language, setLanguage] = useState<number>(categories?.[0].id ?? 1);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [language, setLanguage] = useState(
+    (categories?.[0].id ?? 1).toString()
+  );
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -45,12 +47,13 @@ function AddTipsForm({ onCloseModal }: onCloseProp) {
 
   const optionTypes: OptionType[] =
     categories?.reduce((acc: OptionType[], cur: CategoriesType) => {
-      acc.push({ label: cur.name, value: cur.id });
+      acc.push({ label: cur.name, value: cur.id.toString() });
       return acc;
     }, []) || [];
 
+
   return (
-    // <FormLayout title="Add New Tip" type="modal">
+  
     <form onSubmit={handleSubmit}>
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold tracking-wider">Add New Tip</h1>
@@ -83,10 +86,9 @@ function AddTipsForm({ onCloseModal }: onCloseProp) {
             <SpinnerMini />
           ) : (
             <Dropdown
-              isHide={false}
               name="language"
               value={language}
-              onChange={(e) => setLanguage(parseInt(e.target.value))}
+              onChange={(e) => setLanguage(e.target.value)}
               options={optionTypes}
             />
           )}

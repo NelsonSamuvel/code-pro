@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
-import { useAuthLayout } from "../../context/AuthLayoutProvider";
+import { Link, useLocation } from "react-router-dom";
 
 export default function AuthOption() {
-  const { isLoginPage } = useAuthLayout();
+  const location = useLocation();
+
+  const isLoginPage = location.pathname === "/login";
 
   return (
     <div className="text-blue-600 text-center border py-8">
