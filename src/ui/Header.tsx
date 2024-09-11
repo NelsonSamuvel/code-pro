@@ -12,7 +12,7 @@ export default function Header() {
   }
 
   return (
-    <header className="flex items-center justify-between p-4">
+    <header className="flex items-center justify-between p-4 col-span-3">
       <Logo />
       <MenuBar isMenuOpen={isMenuOpen} handleMenu={handleMenu} />
       <NavbarList handleMenu={handleMenu} />

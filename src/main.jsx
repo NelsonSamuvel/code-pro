@@ -20,7 +20,9 @@ import SignupForm from "./features/authentication/SignupForm.jsx";
 import TipsPage from "./pages/TipsPage.tsx";
 import PageNotFound from "./ui/PageNotFound.jsx";
 import AccountPage from "./pages/AccountPage.tsx";
+import DashboardLayout from "./ui/DashboardLayout.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
+import MyTipsList from "./features/dashboard/MyTipsList.tsx";
 const router = createBrowserRouter([
   {
     element: (
@@ -38,16 +40,26 @@ const router = createBrowserRouter([
         element: <TipsPage />,
       },
       {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
-      {
         path: "/account",
         element: <AccountPage />,
       },
       {
         path: "*",
         element: <PageNotFound />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: "userDashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "userTips",
+        element: <MyTipsList />,
       },
     ],
   },

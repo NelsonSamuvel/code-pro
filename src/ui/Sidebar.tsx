@@ -8,8 +8,8 @@ import SidebarRow from "./SidebarRow";
 
 function Sidebar() {
   return (
-    <div className="py-4  flex flex-col gap-6 sm:gap-2  shadow-lg">
-      <SidebarRow to="userDashboard">
+    <div className="py-4  flex flex-col gap-6 sm:gap-2 shadow-lg h-screen">
+      <SidebarRow to="dashboard/userDashboard">
         <div className="bg-slate-50 p-2 rounded-md">
           <HiRectangleGroup className="custom-icons" />
         </div>
@@ -17,7 +17,7 @@ function Sidebar() {
           <p className="text-stone-700">DashBoard</p>
         </div>
       </SidebarRow>
-      <SidebarRow to="userTips">
+      <SidebarRow to="dashboard/userTips">
         <div className="bg-slate-50 p-2 rounded-md">
           <HiMiniSquare3Stack3D className="custom-icons" />
         </div>
