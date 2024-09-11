@@ -3,9 +3,8 @@ import {
   differenceInDays,
   differenceInMinutes,
   differenceInSeconds,
-  subDays,
+
 } from "date-fns";
-import { useSearch } from "../../context/SearchProvider";
 
 import NotFound from "../../ui/NotFound";
 
@@ -14,18 +13,19 @@ import { sortByDate } from "../../helpers/utils";
 import { useTips } from "./UseTips";
 import Spinner from "../../ui/Spinner";
 import { useSearchParams } from "react-router-dom";
-
+import { useSearchFilter } from "../../store/useSearchFilter";
 
 type Name = "title" | "created_at";
 type Direction = "asc" | "desc";
 
 function TipsList() {
-  const { searchTip, sortTip, view } = useSearch();
+  const searchTip = useSearchFilter((state) => state.searchTip);
+  const sortTip = useSearchFilter((state) => state.sortTip);
+  const view = useSearchFilter((state) => state.view);
 
   const { tips, isLoading } = useTips();
 
   const [searchParams] = useSearchParams();
-
 
   if (isLoading) return <Spinner />;
 

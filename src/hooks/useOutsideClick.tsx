@@ -16,7 +16,7 @@ export function useOutsideClick(
   useEffect(() => {
     function handleClick(this: Document, e: MouseEvent) {
       const target = e.target as HTMLElement;
-      console.log(target);
+
       if (
         ref?.current &&
         !ref.current.contains(target as Node) &&

@@ -41,7 +41,6 @@ export async function getMyTips(user_id: string) {
 
   if (error) throw new Error(error.message);
 
-  console.log(data);
 
   return data;
 }

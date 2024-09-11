@@ -15,21 +15,20 @@ import { Toaster } from "react-hot-toast";
 //Pages
 import LoginForm from "./features/authentication/LoginForm.tsx";
 import ProtectedRoute from "./pages/ProtectedRoute.tsx";
-import AuthLayout from "./pages/AuthLayout.jsx";
+import AuthLayout from "./pages/AuthLayout.tsx";
 import SignupForm from "./features/authentication/SignupForm.jsx";
 import TipsPage from "./pages/TipsPage.tsx";
 import PageNotFound from "./ui/PageNotFound.jsx";
 import AccountPage from "./pages/AccountPage.tsx";
-import { MenuProvider } from "./context/MenuProvider.tsx";
+import DashboardLayout from "./ui/DashboardLayout.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
+import MyTipsList from "./features/dashboard/MyTipsList.tsx";
 const router = createBrowserRouter([
   {
     element: (
-      <MenuProvider>
-        <ProtectedRoute>
-          <App />
-        </ProtectedRoute>
-      </MenuProvider>
+      <ProtectedRoute>
+        <App />
+      </ProtectedRoute>
     ),
     children: [
       {
@@ -41,16 +40,26 @@ const router = createBrowserRouter([
         element: <TipsPage />,
       },
       {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
-      {
         path: "/account",
         element: <AccountPage />,
       },
       {
         path: "*",
         element: <PageNotFound />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: "userDashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "userTips",
+        element: <MyTipsList />,
       },
     ],
   },
