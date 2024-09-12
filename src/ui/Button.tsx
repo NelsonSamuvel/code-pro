@@ -15,10 +15,6 @@ function Button({
   id = "",
   type = "primary",
 }: btnType) {
-  function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
-    onClick?.();
-  }
-
   const btnStyles: any = {
     primary:
       "bg-stone-900 p-2 text-white rounded-sm text-lg hover:bg-stone-800",
@@ -31,7 +27,7 @@ function Button({
       disabled={disabled}
       id={id}
       className={btnStyles[type]}
-      onClick={handleClick}
+      onClick={onClick}
     >
       {children}
     </button>

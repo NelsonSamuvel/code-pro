@@ -11,6 +11,7 @@ export interface TipsType {
   updated_at?: Date | null;
   user_id: string | undefined;
   profiles?: ProfilesType;
+  categories?: CategoriesType;
 }
 
 export async function getTips() {
@@ -40,7 +41,6 @@ export async function getMyTips(user_id: string) {
     .eq("user_id", user_id);
 
   if (error) throw new Error(error.message);
-
 
   return data;
 }
