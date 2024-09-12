@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import AuthOption from "../features/authentication/AuthOption";
-import AuthHeader from "../ui/AuthHeader";
+import AuthHeader from "./AuthHeader";
 
 function AuthLayout() {
   return (

@@ -1,6 +1,6 @@
 import { HiUser } from "react-icons/hi2";
 import { NavLink } from "react-router-dom";
-import { ActiveType, MenuPropsType } from "./SIdeMenu";
+import { ActiveType } from "./SideMenu";
 import { useAuth } from "../../features/authentication/useAuth";
 
 type PropsType = {

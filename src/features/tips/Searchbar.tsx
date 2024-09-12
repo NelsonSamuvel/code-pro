@@ -44,10 +44,10 @@ export default function Searchbar() {
           />
           <HiSearch className="h-5 w-5 stroke-slate-500 fill-slate-500 absolute top-[11px] left-2" />
           <div
-            className="absolute top-0 right-0 hover:bg-stone-200 rounded-md w-10 h-12 text-center cursor-pointer sm:hidden"
+            className="absolute top-0 right-0 flex items-center justify-center hover:bg-stone-200 rounded-md w-10 h-12 text-center cursor-pointer sm:hidden"
             onClick={() => setHideFilters((prev) => !prev)}
           >
-            <button className="absolute top-2.5 right-3">
+            <button className="absolute top-2.5">
               <HiEllipsisHorizontal className="h-5 w-5 sm:hidden  stroke-slate-500 fill-slate-500 " />
             </button>
           </div>
@@ -69,7 +69,7 @@ export default function Searchbar() {
             <li key={option.value}>
               <button
                 className="w-full rounded-md text-left p-2 hover:bg-stone-100"
-                onClick={() => updateSortTip?.(option.value)}
+                onClick={() => updateSortTip(option.value)}
               >
                 {option.label}
               </button>

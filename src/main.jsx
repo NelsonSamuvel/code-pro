@@ -1,7 +1,7 @@
 //Libraries
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.jsx";
+import App from "./App.tsx";
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
@@ -15,7 +15,7 @@ import { Toaster } from "react-hot-toast";
 //Pages
 import LoginForm from "./features/authentication/LoginForm.tsx";
 import ProtectedRoute from "./pages/ProtectedRoute.tsx";
-import AuthLayout from "./pages/AuthLayout.tsx";
+import AuthLayout from "./ui/AuthLayout.tsx";
 import SignupForm from "./features/authentication/SignupForm.jsx";
 import TipsPage from "./pages/TipsPage.tsx";
 import PageNotFound from "./ui/PageNotFound.jsx";
