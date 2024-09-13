@@ -11,19 +11,18 @@ const AccountPage = () => {
 
   if (!user || !profile) return null;
 
-  const authImg = new URL("../assets/auth.jpg", import.meta.url).href;
   return (
-    <section className="lg:max-w-5xl  mx-auto">
+    <section className="max-w-3xl lg:max-w-4xl  mx-auto">
       <div className="flex justify-between gap-4">
         <ProfileForm
           profile={profile}
           user={{ id: user.id, email: user.email as string }}
         />
-        <div className="relative hidden md:block">
+        <div className="relative hidden lg:flex items-center">
           <img
-            src={authImg}
+            src="/assets/svg/profile-update.svg"
             alt="auth-img"
-            className="object-fit w-[400px] h-[400px] mt-24 rounded-md"
+            className="object-fit lg:w-[400px] lg:h-[400px]  rounded-md"
           />
           {/* <img src={authImg2} alt="auth-img" className="object-fit w-[400px] h-[400px] mt-24 rounded-md absolute -top-24 -z-10 -right-24" /> */}
         </div>

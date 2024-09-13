@@ -22,7 +22,7 @@ import PageNotFound from "./ui/PageNotFound.jsx";
 import AccountPage from "./pages/AccountPage.tsx";
 import DashboardLayout from "./ui/DashboardLayout.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
-import MyTipsList from "./features/dashboard/MyTipsList.tsx";
+import MyTips from "./pages/MyTips.tsx";
 const router = createBrowserRouter([
   {
     element: (
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
       },
       {
         path: "userTips",
-        element: <MyTipsList />,
+        element: <MyTips />,
       },
     ],
   },

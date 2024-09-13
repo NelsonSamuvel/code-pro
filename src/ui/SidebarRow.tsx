@@ -11,7 +11,7 @@ function SidebarRow({ children, to }: PropsType): ReactElement {
     <NavLink
       to={`/${to}`}
       className={({ isActive }) => `
-    flex flex-col sm:flex-row items-center sm:gap-4 hover:bg-stone-100 text-sm  sm:text-lg px-5  w-full mx-auto justify-between
+    flex flex-col gap-2 font-semibold md:flex-row items-center rounded-md md:gap-4 hover:bg-stone-100 text-sm  md:text-lg px-5 py-2  w-full mx-auto justify-between
     ${isActive ? "bg-stone-200" : ""}
     `}
     >

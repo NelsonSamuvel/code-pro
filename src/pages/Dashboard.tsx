@@ -1,4 +1,4 @@
-import MyTipsList from "../features/dashboard/MyTipsList";
+import MyTipsList from "../features/myTips/MyTipsList";
 import Sidebar from "../ui/Sidebar";
 
 const Dashboard = () => {
