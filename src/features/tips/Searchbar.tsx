@@ -6,6 +6,7 @@ import AddTipsForm from "./AddTipsForm";
 import LayoutOptions from "../../ui/LayoutOptions";
 import { useEffect, useState } from "react";
 import { useSearchFilter } from "../../store/useSearchFilter";
+import AddTipsModal from "../../ui/AddTipsModal";
 
 const options = [
   { label: "Sort by A-Z", value: "title-asc" },
@@ -65,29 +66,25 @@ export default function Searchbar() {
         <ul
           className={`${isHidden} sm:hidden fixed border-2 bottom-0 w-full bg-white px-6 py-2 left-0  space-y-2`}
         >
-          {options?.map((option) => (
-            <li key={option.value}>
-              <button
-                className="w-full rounded-md text-left p-2 hover:bg-stone-100"
-                onClick={() => updateSortTip(option.value)}
+          {options?.map((option) => {
+            const activeSort = option.value === sortTip ? "bg-stone-200" : "";
+            return (
+              <li
+                key={option.value}
+                className={`hover:bg-stone-100 ${activeSort}`}
               >
-                {option.label}
-              </button>
-            </li>
-          ))}
+                <button
+                  className="w-full rounded-md text-left p-2 "
+                  onClick={() => updateSortTip(option.value)}
+                >
+                  {option.label}
+                </button>
+              </li>
+            );
+          })}
         </ul>
         <LayoutOptions view={view} updateView={updateView} />
-        <Modal.Open opens="add">
-          <button className="btn py-2.5 sm:py-2.5 md:py-2 rounded-md px-2.5">
-            <HiMiniPlus className="sm:hidden" />
-            <p className="hidden sm:block  text-sm sm:text-[12px] md:text-[14px] font-semibold">
-              Add New{" "}
-            </p>
-          </button>
-        </Modal.Open>
-        <Modal.Window name="add">
-          <AddTipsForm />
-        </Modal.Window>
+        <AddTipsModal />
       </div>
     </Modal>
   );

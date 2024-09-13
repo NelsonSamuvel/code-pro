@@ -33,7 +33,7 @@ const Menu = ({ children }: MenuType) => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
   function handleSelectedId(id: number) {
-    setSelectedId(id);
+    setSelectedId((prev) => (prev === id ? null : id));
   }
 
   function closeMenu() {
@@ -71,7 +71,7 @@ function Window({ id, children }: MenuWindowType & ChildrenType) {
   return (
     <div
       ref={ref}
-      className=" border bg-white p-2  shadow-md absolute right-4 top-14 z-10"
+      className=" border bg-white p-2  shadow-md absolute right-4 top-16 z-10"
     >
       {children}
     </div>

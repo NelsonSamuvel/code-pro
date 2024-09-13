@@ -1,5 +1,5 @@
 .input {
-  @apply border border-slate-300 rounded-lg px-3 h-10 focus:outline-none focus:ring-1 focus:ring-stone-700 focus:ring-offset-1 focus:shadow-md
+  @apply border border-slate-300 rounded-lg px-3 py-2 h-10 focus:outline-none focus:ring-1 focus:ring-stone-700 focus:ring-offset-1 focus:shadow-md
     text-stone-700;
 }
 

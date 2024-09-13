@@ -5,11 +5,11 @@ export interface TipsType {
   category_id: number;
   content: string;
   created_at: Date | string;
-  id?: number;
+  id: number;
   image: string | null;
   title: string;
   updated_at?: Date | null;
-  user_id: string | undefined;
+  user_id: string;
   profiles?: ProfilesType;
   categories?: CategoriesType;
 }
@@ -43,4 +43,9 @@ export async function getMyTips(user_id: string) {
   if (error) throw new Error(error.message);
 
   return data;
+}
+
+export async function deleteTips(id: number) {
+  const { error } = await supabase.from("tips").delete().eq("id", id);
+  if (error) throw new Error(error.message);
 }
