@@ -11,7 +11,7 @@ import { HiXMark } from "react-icons/hi2";
 import { CategoriesType } from "../../services/apiCategories";
 import { onCloseProp } from "../../ui/Modal";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { useEditTip } from "../../store/useEditTip";
+import { useEditTips } from "../myTips/useEditTips";
 
 type FormData = {
   title: string;
@@ -19,32 +19,39 @@ type FormData = {
   category: string;
 };
 
-function AddTipsForm({ onCloseModal, name }: onCloseProp) {
+export type TipType = {
+  id?: number;
+  title: string;
+  content: string;
+  category: string;
+};
+
+type TipEditType = {
+  tipToEdit: TipType;
+};
+
+function AddTipsForm({
+  onCloseModal,
+  tipToEdit = {},
+}: onCloseProp & TipEditType) {
   const { categories, isLoading } = useCategories();
   const { user } = useAuth();
   const { addTip, isAdding } = useAddTip();
+  const { updateTips, isUpdating } = useEditTips();
 
-  const tip = useEditTip((state) => state.tip);
+  const { id: editId, ...editValues } = tipToEdit;
 
-  console.log(tip);
+  const isEdit = Boolean(editId);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    defaultValues:
-      name === "edit"
-        ? {
-            title: tip.title,
-            content: tip.content,
-            category: tip.category_id?.toString(),
-          }
-        : {},
+    defaultValues: isEdit ? editValues : {},
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
     const { title, content, category } = data;
     const newTip = {
       title,
@@ -56,11 +63,24 @@ function AddTipsForm({ onCloseModal, name }: onCloseProp) {
       user_id: user?.id ?? "",
     };
 
-    addTip(newTip, {
-      onSuccess: () => {
-        onCloseModal?.();
-      },
-    });
+    const editTips = {
+      title: title,
+      content: content,
+      category_id: category,
+    };
+
+    if (isEdit) {
+      updateTips(
+        { id: editId, editTips },
+        {
+          onSuccess: onCloseModal,
+        }
+      );
+    } else {
+      addTip(newTip, {
+        onSuccess: onCloseModal,
+      });
+    }
   };
 
   const optionTypes: OptionType[] =
@@ -72,7 +92,9 @@ function AddTipsForm({ onCloseModal, name }: onCloseProp) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold tracking-wider">Add New Tip</h1>
+        <h1 className="text-lg font-semibold tracking-wider">
+          {isEdit ? `Edit tip#${tipToEdit.id}` : "Add New Tip"}{" "}
+        </h1>
         <button className="rounded-icon" onClick={() => onCloseModal?.()}>
           <HiXMark className="custom-icons" />
         </button>

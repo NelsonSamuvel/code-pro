@@ -56,18 +56,15 @@ export async function getMyTips(user_id: string): Promise<MyTipsType[]> {
   return data as MyTipsType[];
 }
 
-export async function getCurrentTip(tipId: number): Promise<CurrentTipsType> {
-  const { data, error } = await supabase
-    .from("tips")
-    .select("title, content, category:id")
-    .eq("id", tipId)
-    .single();
-  if (error) throw new Error(error.message);
 
+
+export async function updateTips({id,editTips}) {
+  console.log(editTips);
+  const {data,error} = await supabase.from("tips").update(editTips).eq("id",id).select().single();
+  if(error) throw new Error(error.message);
+  console.log(data);
   return data;
 }
-
-export async function updateTips() {}
 
 export async function deleteTips(id: number) {
   const { error } = await supabase.from("tips").delete().eq("id", id);
