@@ -9,33 +9,51 @@ import { useAuth } from "../authentication/useAuth";
 import { useAddTip } from "./useAddTip";
 import { HiXMark } from "react-icons/hi2";
 import { CategoriesType } from "../../services/apiCategories";
+import { onCloseProp } from "../../ui/Modal";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useEditTip } from "../../store/useEditTip";
 
-type onCloseProp = {
-  onCloseModal?: () => void;
+type FormData = {
+  title: string;
+  content: string;
+  category: string;
 };
 
-function AddTipsForm({ onCloseModal }: onCloseProp) {
+function AddTipsForm({ onCloseModal, name }: onCloseProp) {
   const { categories, isLoading } = useCategories();
   const { user } = useAuth();
   const { addTip, isAdding } = useAddTip();
 
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [language, setLanguage] = useState(
-    (categories?.[0].id ?? 1).toString()
-  );
+  const tip = useEditTip((state) => state.tip);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (!title || !content || !language) return;
+  console.log(tip);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    defaultValues:
+      name === "edit"
+        ? {
+            title: tip.title,
+            content: tip.content,
+            category: tip.category_id?.toString(),
+          }
+        : {},
+  });
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    console.log(data);
+    const { title, content, category } = data;
     const newTip = {
       title,
       content,
-      category_id: Number(language),
+      category_id: Number(category),
       updated_at: null,
       image: null,
       created_at: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
-      user_id: user?.id,
+      user_id: user?.id ?? "",
     };
 
     addTip(newTip, {
@@ -43,7 +61,7 @@ function AddTipsForm({ onCloseModal }: onCloseProp) {
         onCloseModal?.();
       },
     });
-  }
+  };
 
   const optionTypes: OptionType[] =
     categories?.reduce((acc: OptionType[], cur: CategoriesType) => {
@@ -51,10 +69,8 @@ function AddTipsForm({ onCloseModal }: onCloseProp) {
       return acc;
     }, []) || [];
 
-
   return (
-  
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold tracking-wider">Add New Tip</h1>
         <button className="rounded-icon" onClick={() => onCloseModal?.()}>
@@ -62,39 +78,66 @@ function AddTipsForm({ onCloseModal }: onCloseProp) {
         </button>
       </div>
       <>
-        <FormRow label="Title">
+        <FormRow label="Title" error={errors.title?.message}>
           <input
             className="input"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
             type="text"
             id="title"
             disabled={isAdding}
+            {...register("title", {
+              required: {
+                value: true,
+                message: "This Field is required",
+              },
+              minLength: {
+                value: 3,
+                message: "Title must be at least 3 characters",
+              },
+            })}
           />
         </FormRow>
 
-        <FormRow label="Content">
+        <FormRow label="Content" error={errors.content?.message}>
           <textarea
             className="input h-32"
             id="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+            {...register("content", {
+              required: {
+                value: true,
+                message: "This Field is required",
+              },
+              validate: (value) => {
+                return (
+                  value.split(" ").length >= 5 ||
+                  "The description should have at least 5 words and above"
+                );
+              },
+            })}
           />
         </FormRow>
-        <FormRow label="Choose Language">
+        <FormRow label="Choose Language" error={errors.category?.message}>
           {isLoading ? (
             <SpinnerMini />
           ) : (
-            <Dropdown
-              name="language"
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              options={optionTypes}
-            />
+            <select
+              className={`input text-sm font-semibold py-2.5`}
+              {...register("category", {
+                required: {
+                  value: true,
+                  message: "this field is required",
+                },
+              })}
+            >
+              {optionTypes?.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
           )}
         </FormRow>
         <FormRow>
-          <Button disabled={false}>Add</Button>
+          <Button disabled={isAdding}>Add</Button>
         </FormRow>
       </>
     </form>

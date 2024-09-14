@@ -1,6 +1,6 @@
 import supabase from "./supabase";
 
-export interface CategoriesType {
+export type CategoriesType =  {
   id: number;
   name: string;
 }

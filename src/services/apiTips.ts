@@ -1,11 +1,12 @@
 import supabase from "./supabase";
 import { ProfilesType } from "../types/api/apiTips.type";
+import { CategoriesType } from "./apiCategories";
 
 export interface TipsType {
   category_id: number;
   content: string;
   created_at: Date | string;
-  id: number;
+  id?: number;
   image: string | null;
   title: string;
   updated_at?: Date | null;
@@ -13,6 +14,10 @@ export interface TipsType {
   profiles?: ProfilesType;
   categories?: CategoriesType;
 }
+
+type CurrentTipsType = Partial<TipsType> & {
+  category: Partial<CategoriesType>;
+};
 
 export async function getTips() {
   const { data, error } = await supabase
@@ -34,7 +39,13 @@ export async function addTip(newTip: TipsType): Promise<TipsType> {
   return data;
 }
 
-export async function getMyTips(user_id: string) {
+type CategoryType = {
+  category: CategoriesType;
+};
+
+type MyTipsType = TipsType & CategoryType;
+
+export async function getMyTips(user_id: string): Promise<MyTipsType[]> {
   const { data, error } = await supabase
     .from("tips")
     .select("*, category : categories(id,name)")
@@ -42,8 +53,21 @@ export async function getMyTips(user_id: string) {
 
   if (error) throw new Error(error.message);
 
+  return data as MyTipsType[];
+}
+
+export async function getCurrentTip(tipId: number): Promise<CurrentTipsType> {
+  const { data, error } = await supabase
+    .from("tips")
+    .select("title, content, category:id")
+    .eq("id", tipId)
+    .single();
+  if (error) throw new Error(error.message);
+
   return data;
 }
+
+export async function updateTips() {}
 
 export async function deleteTips(id: number) {
   const { error } = await supabase.from("tips").delete().eq("id", id);

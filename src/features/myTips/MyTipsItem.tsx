@@ -4,6 +4,9 @@ import { formatDateTime } from "../../helpers/utils";
 import MyTipsMenu from "./MyTipsMenu";
 import Menu from "../../ui/Menu";
 import { useDeleteTips } from "./useDeleteTips";
+import { useCurrentTip } from "./useCurrentTip";
+import { TipType, useEditTip } from "../../store/useEditTip";
+import { useCallback } from "react";
 
 type PropsType = {
   tip: TipsType;
@@ -15,10 +18,23 @@ type PropsType = {
 
 const MyTipsItem = ({ tip, category }: PropsType) => {
   const { deleteTips, isDeleting } = useDeleteTips();
+  const setTip = useEditTip((state) => state.setTip);
+
+  const tipsToEdit: TipType = {
+    id: tip.id,
+    title: tip.title,
+    content: tip.content,
+    category_id: category.id,
+  };
 
   function handleDelete() {
-    deleteTips(tip.id);
+    deleteTips(tip.id as number);
   }
+
+  const handleEdit = (tip: TipType) => {
+    console.log("handle edit");
+    setTip(tip);
+  };
 
   return (
     <li className="border mt-4 p-4 divide-y-2 divide-opacity-35 divide-stone-400 relative">
@@ -29,7 +45,12 @@ const MyTipsItem = ({ tip, category }: PropsType) => {
         </div>
 
         <div className="hidden md:block">
-          <MyTipsMenu onDelete={handleDelete} isDeleting={isDeleting} />
+          <MyTipsMenu
+            onDelete={handleDelete}
+            isDeleting={isDeleting}
+            onEdit={handleEdit}
+            tip={tipsToEdit}
+          />
         </div>
 
         <Menu.Open selectedId={tip.id}>
@@ -38,7 +59,12 @@ const MyTipsItem = ({ tip, category }: PropsType) => {
           </div>
         </Menu.Open>
         <Menu.Window id={tip.id as number}>
-          <MyTipsMenu onDelete={handleDelete} isDeleting={isDeleting} />
+          <MyTipsMenu
+            onDelete={handleDelete}
+            isDeleting={isDeleting}
+            tip={tipsToEdit}
+            onEdit={handleEdit}
+          />
         </Menu.Window>
       </div>
       <div className="py-2">

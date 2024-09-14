@@ -1,3 +1,4 @@
+import { RegisterOptions } from "react-hook-form";
 import { HiViewGrid, HiViewList } from "react-icons/hi";
 
 export interface OptionType {

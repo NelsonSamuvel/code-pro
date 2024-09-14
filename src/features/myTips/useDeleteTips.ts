@@ -10,7 +10,6 @@ import { useAuth } from "../authentication/useAuth";
 export function useDeleteTips() {
   const { user } = useAuth();
 
-  console.log(user?.id);
 
   const queryClient = useQueryClient();
 

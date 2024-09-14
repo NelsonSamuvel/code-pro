@@ -12,16 +12,12 @@ import AddTipsModal from "../../ui/AddTipsModal";
 const MyTipsList = () => {
   const { user } = useAuth();
 
-  const { myTips, isLoading } = useMyTips(user?.id ?? ("" as string));
+  const { myTips, isLoading, error } = useMyTips(user?.id);
 
-  if (isLoading)
-    return (
-      <div className="">
-        <Spinner />
-      </div>
-    );
+  if (isLoading) return <Spinner />;
 
-  if (!myTips?.length) return <EmptyData name="Tips" />;
+  if (error) return <p className="flex">{error.message}</p>;
+  if ( !myTips?.length) return <EmptyData name="Tips" />;
 
   return (
     <Menu>

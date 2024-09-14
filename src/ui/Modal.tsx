@@ -20,7 +20,8 @@ interface ModalType {
   name: string;
 }
 
-type onCloseProp = {
+export type onCloseProp = {
+  name?: string;
   onCloseModal?: () => void;
 };
 
@@ -53,7 +54,7 @@ function Window({ children, name }: Partial<ModalType>) {
 
   if (open !== name) return null;
 
-  const closeModals: onCloseProp = { onCloseModal: close };
+  const closeModals: onCloseProp = { onCloseModal: close,name };
 
   return (
     <div className="fixed inset-0 bg-slate-400/20 backdrop-blur-sm z-20">
