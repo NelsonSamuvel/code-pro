@@ -4,19 +4,17 @@ import Spinner from "../ui/Spinner";
 import ProfileForm from "../features/profile/ProfileForm";
 
 const AccountPage = () => {
-  const { user, isLoading: isLoadingUser } = useAuth();
-  const { profile, isLoading } = useProfile(user?.id);
+  const { profile, isLoading } = useProfile();
 
-  if (isLoading || isLoadingUser) return <Spinner />;
+  if (isLoading) return <Spinner />;
 
-  if (!user || !profile) return null;
+  if (!profile) return null;
 
   return (
     <section className="max-w-3xl lg:max-w-4xl  mx-auto">
       <div className="flex justify-between gap-4">
         <ProfileForm
           profile={profile}
-          user={{ id: user.id, email: user.email as string }}
         />
         <div className="relative hidden lg:flex items-center">
           <img

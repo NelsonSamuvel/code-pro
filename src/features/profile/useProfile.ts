@@ -1,11 +1,10 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { getProfile } from "../../services/apiProfiles";
 
-export function useProfile(id: string | undefined) {
+export function useProfile() {
   const { data: profile, isLoading } = useQuery({
-    queryKey: ["profile", id],
-    queryFn: () => getProfile(id as string),
-    enabled: !!id,
+    queryKey: ["profile"],
+    queryFn: () => getProfile(),
   });
 
   return { profile, isLoading };

@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode } from "react";
 
 interface FormRowType {
-  children: ReactElement | ReactElement[];
+  children: ReactElement;
   label?: string;
   error?: string | undefined;
   icon?: ReactNode;

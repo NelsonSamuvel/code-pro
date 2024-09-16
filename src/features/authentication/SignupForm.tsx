@@ -1,8 +1,16 @@
 import FormLayout from "../../ui/FormLayout";
 import FormRow from "../../ui/FormRow";
 import Button from "../../ui/Button";
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useSignup } from "./useSignup";
+
+type FormData = {
+  fullName: string;
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 
 export default function SignupForm() {
   const { signUp, isSigning } = useSignup();
@@ -13,18 +21,23 @@ export default function SignupForm() {
     getValues,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm<FormData>();
 
-  function onSubmit({ email, password, fullName }) {
+  const onSubmit: SubmitHandler<FieldValues> = ({
+    email,
+    password,
+    fullName,
+    username,
+  }) => {
     signUp(
-      { email, password, fullName },
+      { email, password, fullName, username },
       {
         onSettled: () => {
           reset();
         },
       }
     );
-  }
+  };
 
   return (
     <FormLayout
@@ -38,6 +51,16 @@ Code pro Account 🚀"
             id="fullName"
             type="text"
             {...register("fullName", {
+              required: "This Field is required",
+            })}
+          />
+        </FormRow>
+        <FormRow label="Username" error={errors?.username?.message}>
+          <input
+            className="input"
+            id="username"
+            type="text"
+            {...register("username", {
               required: "This Field is required",
             })}
           />

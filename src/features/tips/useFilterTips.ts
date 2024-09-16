@@ -7,20 +7,12 @@ import {
   differenceInMinutes,
   differenceInSeconds,
 } from "date-fns";
-import { useTips } from "./UseTips";
 import { TipsType } from "../../services/apiTips";
 
 type Name = "title" | "created_at";
 type Direction = "asc" | "desc";
 
-type FilterTipsType = {
-  sortedTips: TipsType[];
-  isLoading: boolean;
-};
-
-export const useFilterTips = (): FilterTipsType => {
-  const { tips, isLoading } = useTips();
-
+export const useFilterTips = (tips: TipsType[]): TipsType[] => {
   const [searchParams] = useSearchParams();
   const searchTip = useSearchFilter((state) => state.searchTip);
   const sortTip = useSearchFilter((state) => state.sortTip);
@@ -30,18 +22,16 @@ export const useFilterTips = (): FilterTipsType => {
     if (categoryVal === "all") {
       return tips;
     }
-    return tips?.filter((tip) => tip.categories.name === categoryVal);
+    return tips?.filter((tip) => tip.categories?.name === categoryVal);
   }, [tips, categoryVal]);
 
   const searchedTip = useMemo(() => {
-    if (searchTip.length > 2) {
-      return filteredTips?.filter(
-        (tip) =>
-          tip.title.toLowerCase().includes(searchTip.toLowerCase()) ||
-          tip.content.toLowerCase().includes(searchTip.toLowerCase())
-      );
-    }
-    return filteredTips;
+    return filteredTips?.filter(
+      (tip) =>
+        tip.title.toLowerCase().includes(searchTip.toLowerCase()) ||
+        tip.content.toLowerCase().includes(searchTip.toLowerCase()) ||
+        tip.categories.keywords.includes(searchTip.toLowerCase())
+    );
   }, [searchTip, filteredTips]);
 
   const [name, direction]: [Name, Direction] = sortTip.split("-") as [
@@ -72,5 +62,5 @@ export const useFilterTips = (): FilterTipsType => {
     }
   }, [searchedTip, sortTip]);
 
-  return { sortedTips, isLoading };
+  return sortedTips;
 };

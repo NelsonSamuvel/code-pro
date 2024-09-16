@@ -1,17 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addTip as addTipApi } from "../../services/apiTips";
+import { updateTips as updateTipsApi } from "../../services/apiTips";
 import toast from "react-hot-toast";
 
-export function useAddTip() {
+export function useEditTips() {
   const queryClient = useQueryClient();
-  const { mutate: addTip, isPending: isAdding } = useMutation({
-    mutationFn: addTipApi,
-    onSuccess: () => {
-      toast.success("Tip added successfully");
+
+  const { mutate: updateTips, isPending: isUpdating } = useMutation({
+    mutationFn: updateTipsApi,
+    onSuccess: (tip) => {
+      toast.success(`Tip#${tip.id} updated successfully`);
       queryClient.invalidateQueries({
         queryKey: ["tips"],
       });
-
       queryClient.invalidateQueries({
         queryKey: ["myTips"],
       });
@@ -21,5 +21,5 @@ export function useAddTip() {
     },
   });
 
-  return { addTip, isAdding };
+  return { updateTips, isUpdating };
 }

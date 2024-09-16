@@ -1,27 +1,19 @@
-import { createPortal } from "react-dom";
 import Menu from "../../ui/Menu";
 import Spinner from "../../ui/Spinner";
-import { useAuth } from "../authentication/useAuth";
 import MyTipsItem from "./MyTipsItem";
 import { useMyTips } from "./useMyTips";
 import EmptyData from "../../ui/EmptyData";
 import Modal from "../../ui/Modal";
-import AddTipsForm from "../tips/AddTipsForm";
 import AddTipsModal from "../../ui/AddTipsModal";
 
 const MyTipsList = () => {
-  const { user } = useAuth();
 
-  const { myTips, isLoading } = useMyTips(user?.id ?? ("" as string));
+  const { myTips, isLoading, error } = useMyTips();
 
-  if (isLoading)
-    return (
-      <div className="">
-        <Spinner />
-      </div>
-    );
+  if (isLoading) return <Spinner />;
 
-  if (!myTips?.length) return <EmptyData name="Tips" />;
+  if (error) return <p className="flex">{error.message}</p>;
+  if ( !myTips?.length) return <EmptyData name="Tips" />;
 
   return (
     <Menu>

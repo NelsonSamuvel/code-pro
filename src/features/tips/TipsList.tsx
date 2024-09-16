@@ -4,11 +4,14 @@ import TipsItem from "./TipsItem";
 import Spinner from "../../ui/Spinner";
 import { useSearchFilter } from "../../store/useSearchFilter";
 import { useFilterTips } from "./useFilterTips";
+import { useTips } from "./UseTips";
 
 function TipsList() {
   const view = useSearchFilter((state) => state.view);
 
-  const { sortedTips, isLoading } = useFilterTips();
+  const { tips, isLoading } = useTips();
+
+  const sortedTips = useFilterTips(tips?.length ? tips : []);
 
   if (isLoading) return <Spinner />;
 
@@ -16,7 +19,7 @@ function TipsList() {
 
   const gridView =
     view === "grid"
-      ? "grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4"
+      ? "grid-card"
       : "";
 
   return (

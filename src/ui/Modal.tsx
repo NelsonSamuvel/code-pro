@@ -20,7 +20,7 @@ interface ModalType {
   name: string;
 }
 
-type onCloseProp = {
+export type onCloseProp = {
   onCloseModal?: () => void;
 };
 

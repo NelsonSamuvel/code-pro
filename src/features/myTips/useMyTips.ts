@@ -1,12 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { getMyTips } from "../../services/apiTips";
 
-export function useMyTips(user_id: string) {
-  const { data: myTips, isLoading } = useQuery({
-    queryKey: ["myTips", user_id],
-    queryFn: () => getMyTips(user_id),
-    enabled: !!user_id,
+export function useMyTips() {
+  const {
+    data: myTips,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["myTips"],
+    queryFn: getMyTips,
   });
 
-  return { myTips, isLoading };
+  return { myTips, isLoading, error };
 }
