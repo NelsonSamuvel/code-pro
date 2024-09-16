@@ -12,7 +12,7 @@ const MyTipsMenu = ({ onDelete, isDeleting, tip,category }: PropsType) => {
 
   return (
     <Modal>
-      <ul className="text-right space-y-4 sm:space-y-0  md:flex items-center sm:gap-2 sm:text-white justify-between">
+      <ul className="text-right  sm:space-y-0  flex flex-col md:flex-row md:items-center sm:gap-2 sm:text-white justify-between">
         <li>
           <Modal.Open opens="edit">
             <button className="hover:bg-green-500 px-2 py-1 hover:text-white w-full sm:btn sm:bg-green-500 rounded-sm">

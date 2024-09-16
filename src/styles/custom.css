@@ -46,3 +46,8 @@
 .disabled-input {
   @apply disabled:bg-gray-200 disabled:border-none;
 }
+
+
+.grid-card{
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4
+}

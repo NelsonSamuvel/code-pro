@@ -1,9 +1,11 @@
 import supabase from "./supabase";
 
-export type CategoriesType =  {
+export type CategoriesType = {
   id: number;
   name: string;
-}
+  keywords: string[];
+  image: string;
+};
 
 export async function getCategories(): Promise<CategoriesType[]> {
   const { data, error } = await supabase.from("categories").select();

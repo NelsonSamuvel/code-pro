@@ -3,7 +3,7 @@ import { ProfilesType } from "../types/api/apiTips.type";
 import { CategoriesType } from "./apiCategories";
 import { checkAuth } from "./apiAuth";
 
-export interface TipsType {
+export type TipsType = {
   category_id: number;
   content: string;
   created_at: Date | string;
@@ -14,13 +14,9 @@ export interface TipsType {
   user_id: string;
   profiles?: ProfilesType;
   categories?: CategoriesType;
-}
-
-type CurrentTipsType = Partial<TipsType> & {
-  category: Partial<CategoriesType>;
 };
 
-export async function getTips() {
+export async function getTips(): Promise<TipsType[]> {
   const { data, error } = await supabase
     .from("tips")
     .select("*, profiles(*), categories(*)");
@@ -64,11 +60,11 @@ export async function getMyTips(): Promise<MyTipsType[]> {
 
   const { data, error } = await supabase
     .from("tips")
-    .select("*, category : categories(id,name)")
+    .select("*, category : categories(id,name,image)")
     .eq("user_id", user.id);
-
+    
   if (error) throw new Error(error.message);
-
+  
   return data as MyTipsType[];
 }
 

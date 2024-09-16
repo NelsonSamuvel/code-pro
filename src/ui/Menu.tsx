@@ -15,7 +15,7 @@ type MenuType = {
   children: ReactElement | ReactElement[];
 };
 
-type MenuContextType = {
+export type MenuContextType = {
   selectedId: number | null;
   handleSelectedId: (id: number) => void;
   closeMenu: () => void;
@@ -64,17 +64,21 @@ type MenuWindowType = {
 function Window({ id, children }: MenuWindowType & ChildrenType) {
   const { selectedId, closeMenu } = useContext(MenuContext);
 
+  console.log(selectedId);
+
   const ref = useOutsideClick(closeMenu);
 
   if (selectedId !== id) return null;
 
-  return (
+
+  return cloneElement(
     <div
       ref={ref}
-      className=" border bg-white p-2  shadow-md absolute right-4 top-16 z-10"
+      className=" border bg-white p-2  shadow-md absolute right-4 top-[58%] z-10"
     >
       {children}
-    </div>
+    </div>,
+    { closeMenu : closeMenu }
   );
 }
 

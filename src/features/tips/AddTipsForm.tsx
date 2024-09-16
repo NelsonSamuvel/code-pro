@@ -12,6 +12,7 @@ import { CategoriesType } from "../../services/apiCategories";
 import { onCloseProp } from "../../ui/Modal";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useEditTips } from "../myTips/useEditTips";
+import { MenuContextType } from "../../ui/Menu";
 
 type FormData = {
   title: string;
@@ -29,6 +30,7 @@ export type TipType = {
 type TipEditType = {
   tipToEdit: TipType;
   category: string;
+  closeMenu : ()=>void
 };
 
 const defaultTipToEdit: TipType = {
@@ -42,6 +44,7 @@ function AddTipsForm({
   onCloseModal,
   tipToEdit = defaultTipToEdit,
   category,
+  closeMenu,
 }: onCloseProp & TipEditType) {
   const { categories, isLoading } = useCategories();
   const { user } = useAuth();
@@ -73,7 +76,10 @@ function AddTipsForm({
       updateTips(
         { id: editId, editTips },
         {
-          onSuccess: onCloseModal,
+          onSuccess: () => {
+            onCloseModal?.();
+            closeMenu?.();
+          },
         }
       );
     } else {
@@ -86,9 +92,12 @@ function AddTipsForm({
         created_at: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
         user_id: user?.id ?? "",
       };
-      addTip({newTip,categoryName:category}, {
-        onSuccess: onCloseModal,
-      });
+      addTip(
+        { newTip, categoryName: category },
+        {
+          onSuccess: onCloseModal,
+        }
+      );
     }
   };
 
