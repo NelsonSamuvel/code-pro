@@ -2,6 +2,7 @@ import supabase from "./supabase";
 
 type RegisterType = {
   email: string;
+  username: string;
   password: string;
   fullName: string;
 };
@@ -11,7 +12,12 @@ type LoginType = {
   password: string;
 };
 
-export async function signUp({ email, password, fullName }: RegisterType) {
+export async function signUp({
+  email,
+  password,
+  fullName,
+  username,
+}: RegisterType) {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -24,7 +30,22 @@ export async function signUp({ email, password, fullName }: RegisterType) {
 
   if (error) throw new Error("User Sign up failed");
 
-  return data;
+  const { data: profile, error: profileErr } = await supabase
+    .from("profiles")
+    .insert([
+      {
+        user_id: data.user?.id,
+        username: username,
+        bio: "",
+        avatar: null,
+      },
+    ])
+    .select()
+    .single();
+
+  if (profileErr) throw new Error(profileErr.message);
+
+  return profile;
 }
 
 export async function login({ email, password }: LoginType) {

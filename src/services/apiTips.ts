@@ -1,6 +1,7 @@
 import supabase from "./supabase";
 import { ProfilesType } from "../types/api/apiTips.type";
 import { CategoriesType } from "./apiCategories";
+import { checkAuth } from "./apiAuth";
 
 export interface TipsType {
   category_id: number;
@@ -27,10 +28,21 @@ export async function getTips() {
   return data;
 }
 
-export async function addTip(newTip: TipsType): Promise<TipsType> {
+export async function addTip({
+  newTip,
+  categoryName,
+}: { newTip: TipsType } & { categoryName: string }): Promise<TipsType> {
+  const { data: category, error: categoryErr } = await supabase
+    .from("categories")
+    .select("*")
+    .eq("name", categoryName)
+    .single();
+
+  if (categoryErr) throw new Error(categoryErr.message);
+
   const { data, error } = await supabase
     .from("tips")
-    .insert([newTip])
+    .insert([{ ...newTip, category_id: category.id }])
     .select()
     .single();
 
@@ -45,23 +57,54 @@ type CategoryType = {
 
 type MyTipsType = TipsType & CategoryType;
 
-export async function getMyTips(user_id: string): Promise<MyTipsType[]> {
+export async function getMyTips(): Promise<MyTipsType[]> {
+  const user = await checkAuth();
+
+  if (!user?.id) throw new Error("Invalid user");
+
   const { data, error } = await supabase
     .from("tips")
     .select("*, category : categories(id,name)")
-    .eq("user_id", user_id);
+    .eq("user_id", user.id);
 
   if (error) throw new Error(error.message);
 
   return data as MyTipsType[];
 }
 
+type UpdateTipType = {
+  id?: number;
+  editTips: {
+    title: string;
+    content: string;
+    category_name: string;
+  };
+};
 
+export async function updateTips({ id, editTips }: UpdateTipType) {
+  if (!id) return;
 
-export async function updateTips({id,editTips}) {
-  console.log(editTips);
-  const {data,error} = await supabase.from("tips").update(editTips).eq("id",id).select().single();
-  if(error) throw new Error(error.message);
+  const { data: category, error: categoryErr } = await supabase
+    .from("categories")
+    .select("*")
+    .eq("name", editTips.category_name)
+    .single();
+
+  if (categoryErr) throw new Error(categoryErr.message);
+
+  const updatingTip = {
+    title: editTips.title,
+    content: editTips.content,
+    category_id: category.id,
+  };
+
+  const { data, error } = await supabase
+    .from("tips")
+    .update(updatingTip)
+    .eq("id", id)
+    .select()
+    .single();
+  if (error) throw new Error(error.message);
   console.log(data);
   return data;
 }

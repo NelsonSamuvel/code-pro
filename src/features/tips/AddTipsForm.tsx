@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import Button from "../../ui/Button";
-import Dropdown, { OptionType } from "../../ui/Dropdown";
+import { OptionType } from "../../ui/Dropdown";
 import FormRow from "../../ui/FormRow";
 import SpinnerMini from "../../ui/SpinnerMini";
 import { useCategories } from "./useCategories";
@@ -28,11 +28,20 @@ export type TipType = {
 
 type TipEditType = {
   tipToEdit: TipType;
+  category: string;
+};
+
+const defaultTipToEdit: TipType = {
+  id: undefined,
+  title: "",
+  content: "",
+  category: "",
 };
 
 function AddTipsForm({
   onCloseModal,
-  tipToEdit = {},
+  tipToEdit = defaultTipToEdit,
+  category,
 }: onCloseProp & TipEditType) {
   const { categories, isLoading } = useCategories();
   const { user } = useAuth();
@@ -48,25 +57,16 @@ function AddTipsForm({
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    defaultValues: isEdit ? editValues : {},
+    defaultValues: isEdit ? { ...editValues, category } : {},
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     const { title, content, category } = data;
-    const newTip = {
-      title,
-      content,
-      category_id: Number(category),
-      updated_at: null,
-      image: null,
-      created_at: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
-      user_id: user?.id ?? "",
-    };
 
     const editTips = {
       title: title,
       content: content,
-      category_id: category,
+      category_name: category,
     };
 
     if (isEdit) {
@@ -77,7 +77,16 @@ function AddTipsForm({
         }
       );
     } else {
-      addTip(newTip, {
+      const newTip = {
+        title,
+        content,
+        category_id: 0,
+        updated_at: null,
+        image: null,
+        created_at: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
+        user_id: user?.id ?? "",
+      };
+      addTip({newTip,categoryName:category}, {
         onSuccess: onCloseModal,
       });
     }
@@ -85,7 +94,7 @@ function AddTipsForm({
 
   const optionTypes: OptionType[] =
     categories?.reduce((acc: OptionType[], cur: CategoriesType) => {
-      acc.push({ label: cur.name, value: cur.id.toString() });
+      acc.push({ label: cur.name, value: cur.name });
       return acc;
     }, []) || [];
 
@@ -159,7 +168,9 @@ function AddTipsForm({
           )}
         </FormRow>
         <FormRow>
-          <Button disabled={isAdding}>Add</Button>
+          <Button disabled={isAdding || isUpdating}>
+            {isEdit ? "Update" : "Add"}
+          </Button>
         </FormRow>
       </>
     </form>

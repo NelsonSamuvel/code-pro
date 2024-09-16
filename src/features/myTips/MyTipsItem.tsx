@@ -4,7 +4,6 @@ import { formatDateTime } from "../../helpers/utils";
 import MyTipsMenu from "./MyTipsMenu";
 import Menu from "../../ui/Menu";
 import { useDeleteTips } from "./useDeleteTips";
-import { useCallback } from "react";
 import { TipType } from "../tips/AddTipsForm";
 
 type PropsType = {
@@ -18,11 +17,12 @@ type PropsType = {
 const MyTipsItem = ({ tip, category }: PropsType) => {
   const { deleteTips, isDeleting } = useDeleteTips();
 
+
   const tipsToEdit: TipType = {
     id: tip.id,
     title: tip.title,
     content: tip.content,
-    category: category.id.toString(),
+    category: category.name,
   };
 
   function handleDelete() {
@@ -42,6 +42,7 @@ const MyTipsItem = ({ tip, category }: PropsType) => {
             onDelete={handleDelete}
             isDeleting={isDeleting}
             tip={tipsToEdit}
+            category={category.name}
           />
         </div>
 
@@ -55,6 +56,7 @@ const MyTipsItem = ({ tip, category }: PropsType) => {
             onDelete={handleDelete}
             isDeleting={isDeleting}
             tip={tipsToEdit}
+            category={category.name}
           />
         </Menu.Window>
       </div>

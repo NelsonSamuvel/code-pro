@@ -5,9 +5,10 @@ type PropsType = {
   isDeleting: boolean;
   onDelete: () => void;
   tip: TipType;
+  category : string;
 };
 
-const MyTipsMenu = ({ onDelete, isDeleting, tip }: PropsType) => {
+const MyTipsMenu = ({ onDelete, isDeleting, tip,category }: PropsType) => {
 
   return (
     <Modal>
@@ -30,7 +31,7 @@ const MyTipsMenu = ({ onDelete, isDeleting, tip }: PropsType) => {
         </li>
       </ul>
       <Modal.Window name="edit">
-        <AddTipsForm tipToEdit={tip} />
+        <AddTipsForm tipToEdit={tip} category={category}/>
       </Modal.Window>
     </Modal>
   );

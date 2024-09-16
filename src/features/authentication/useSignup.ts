@@ -8,8 +8,8 @@ export function useSignup() {
 
   const { mutate: signUp, isPending: isSigning } = useMutation({
     mutationFn: signUpApi,
-    onSuccess: ({ user: { user_metadata: userData } }) => {
-      toast.success(`${userData.fullName}! Your account has been created`);
+    onSuccess: (profile) => {
+      toast.success(`${profile.username}! Your account has been created`);
       navigate("/login", { replace: true });
     },
     onError: (err) => {

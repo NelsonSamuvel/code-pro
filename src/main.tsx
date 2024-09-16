@@ -1,7 +1,7 @@
 //Libraries
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
+import { Container, createRoot } from "react-dom/client";
+import App from "./App";
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
@@ -13,16 +13,16 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 
 //Pages
-import LoginForm from "./features/authentication/LoginForm.tsx";
-import ProtectedRoute from "./pages/ProtectedRoute.tsx";
-import AuthLayout from "./ui/AuthLayout.tsx";
-import SignupForm from "./features/authentication/SignupForm.jsx";
-import TipsPage from "./pages/TipsPage.tsx";
-import PageNotFound from "./ui/PageNotFound.jsx";
-import AccountPage from "./pages/AccountPage.tsx";
-import DashboardLayout from "./ui/DashboardLayout.tsx";
-import Dashboard from "./pages/Dashboard.tsx";
-import MyTips from "./pages/MyTips.tsx";
+import LoginForm from "./features/authentication/LoginForm";
+import ProtectedRoute from "./pages/ProtectedRoute";
+import AuthLayout from "./ui/AuthLayout";
+import SignupForm from "./features/authentication/SignupForm";
+import TipsPage from "./pages/TipsPage";
+import PageNotFound from "./ui/PageNotFound";
+import AccountPage from "./pages/AccountPage";
+import DashboardLayout from "./ui/DashboardLayout";
+import Dashboard from "./pages/Dashboard";
+import MyTips from "./pages/MyTips";
 const router = createBrowserRouter([
   {
     element: (
@@ -78,14 +78,15 @@ const router = createBrowserRouter([
   },
 ]);
 
+const rootElement = document.getElementById("root") as Container;
+
 const queryClient = new QueryClient();
 
-createRoot(document.getElementById("root")).render(
+createRoot(rootElement).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router}>
-        <App />
-      </RouterProvider>
+      <RouterProvider router={router} />
+
       <ReactQueryDevtools />
       <Toaster
         position="top-center"

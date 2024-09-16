@@ -5,18 +5,17 @@ import { HiEyeOff } from "react-icons/hi";
 import { HiEye } from "react-icons/hi2";
 import Button from "../../ui/Button";
 import { ProfilesType } from "../../services/apiProfiles";
+import { useAuth } from "../authentication/useAuth";
 
-type UserType = {
-  id: string;
-  email: string;
-};
+
 
 type PropsType = {
   profile: ProfilesType;
-  user: UserType;
 };
 
-const ProfileForm = ({ profile, user }: PropsType) => {
+const ProfileForm = ({ profile }: PropsType) => {
+  const {user } = useAuth();
+
   const { updateProfile, isUpdating } = useUpdateProfile();
   const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");

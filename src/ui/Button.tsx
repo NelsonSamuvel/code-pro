@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 interface btnType {
   children: ReactNode;
-  disabled: boolean;
+  disabled?: boolean;
   type?: string;
   onClick?: () => void;
   id?: string;
