@@ -29,18 +29,43 @@ type PropsType = {
   username: string;
   bio: string;
   password: string;
+  avatar: File;
 };
 
 export async function updateProfile({
-  id,
   username,
   bio,
   password,
+  avatar,
 }: PropsType) {
+  const user = await checkAuth();
+
+  if (!user?.id) throw new Error("User not found");
+
+  let avatarLink = null;
+
+  console.log(avatar);
+
+  if (avatar) {
+    const avatarFileName = user.email + "-" + avatar.name;
+    const { error: avatarErr } = await supabase.storage
+      .from("avatars")
+      .upload(avatarFileName, avatar);
+    if (avatarErr) throw new Error(avatarErr.message);
+
+    const { data: imageLink } = supabase.storage
+      .from("avatars")
+      .getPublicUrl(avatarFileName);
+
+    console.log(imageLink);
+
+    avatarLink = imageLink.publicUrl;
+  }
+
   const { data: profile, error: profileError } = await supabase
     .from("profiles")
-    .update({ username, bio })
-    .eq("user_id", id)
+    .update({ username, bio, avatar: avatarLink })
+    .eq("user_id", user.id)
     .select();
 
   if (profileError) throw new Error(profileError.message);
