@@ -28,9 +28,9 @@ export type TipType = {
 };
 
 type TipEditType = {
-  tipToEdit: TipType;
-  category: string;
-  closeMenu : ()=>void
+  tipToEdit?: TipType;
+  category?: string;
+  closeMenu?: () => void;
 };
 
 const defaultTipToEdit: TipType = {

@@ -11,7 +11,7 @@ interface FormRowType {
 function FormRow({ children, label, error, icon, handleIcon }: FormRowType) {
   return (
     <div className="flex flex-col mt-5 space-y-2 relative">
-      <label htmlFor={children.props.id} className="text-stone-900 md:text-lg">
+      <label htmlFor={children.props?.id} className="text-stone-900 md:text-lg cursor-pointer">
         {label}
       </label>
       {children}

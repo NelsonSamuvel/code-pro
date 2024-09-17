@@ -70,7 +70,6 @@ function Window({ id, children }: MenuWindowType & ChildrenType) {
 
   if (selectedId !== id) return null;
 
-
   return cloneElement(
     <div
       ref={ref}
@@ -78,7 +77,7 @@ function Window({ id, children }: MenuWindowType & ChildrenType) {
     >
       {children}
     </div>,
-    { closeMenu : closeMenu }
+    { closeMenu: closeMenu }
   );
 }
 

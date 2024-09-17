@@ -1,7 +1,8 @@
-import { HiUser } from "react-icons/hi2";
+import { HiUser, HiUserCircle } from "react-icons/hi2";
 import { NavLink } from "react-router-dom";
 import { ActiveType } from "./SideMenu";
 import { useAuth } from "../../features/authentication/useAuth";
+import { useProfile } from "../../features/profile/useProfile";
 
 type PropsType = {
   onNavigate: (path: string) => void;
@@ -16,17 +17,34 @@ const mainNav = ({ isActive }: ActiveType) =>
 
 const ProfileMenu = ({ onNavigate, onLogout, isLoggingOut }: PropsType) => {
   const { user } = useAuth();
+
+  const { profile } = useProfile();
+
+  console.log(profile?.avatar);
+
   return (
     <>
       <h2 className="text-xl font-semibold mt-4 px-1 sm:hidden">Profile</h2>
       <div className="flex justify-between items-center gap-4 py-2 px-2 w-full">
-        <p className="text-lg sm:text-base tracking-wide">{user?.email}</p>
-        <HiUser className="" />
+        <p className="text-lg sm:text-base tracking-wide text-stone-800">
+          {user?.email}
+        </p>
+        {profile?.avatar ? (
+          <div className="w-8">
+            <img
+              src={profile.avatar}
+              alt=""
+              className=" rounded-full object-cover"
+            />
+          </div>
+        ) : (
+          <HiUserCircle className="" />
+        )}
       </div>
       <NavLink to="/dashboard" className={mainNav}>
         <button
           onClick={() => onNavigate("/dashboard")}
-          className="hover:bg-stone-100 hover:font-semibold text-[17px] sm:text-base text-stone-500 py-2 px-2  text-start w-full"
+          className="hover:bg-stone-100 hover:font-semibold text-[17px] sm:text-base text-stone-800 py-2 px-2  text-start w-full"
         >
           Dashboard
         </button>
@@ -34,7 +52,7 @@ const ProfileMenu = ({ onNavigate, onLogout, isLoggingOut }: PropsType) => {
       <NavLink to="/account" className={mainNav}>
         <button
           onClick={() => onNavigate("/account")}
-          className="hover:bg-stone-100 hover:font-semibold text-[17px] sm:text-base text-stone-500 py-2 px-2  text-start w-full"
+          className="hover:bg-stone-100 hover:font-semibold text-[17px] sm:text-base text-stone-800 py-2 px-2  text-start w-full"
         >
           Account Settings
         </button>
