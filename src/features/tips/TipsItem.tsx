@@ -7,6 +7,7 @@ import { useAuth } from "../authentication/useAuth";
 import { TipsType } from "../../services/apiTips";
 import Tag from "../../ui/Tag";
 import { HiUserCircle } from "react-icons/hi2";
+import TrimContent from "./TrimContent";
 
 export type TipType = {
   tip: TipsType;
@@ -32,7 +33,7 @@ export default function TipsItem({
   const isStarred = isFavorite ? "fill-yellow-400 stroke-none w-6 h-6" : "";
 
   return (
-    <div className="mt-4 border p-4 flex flex-col gap-4 justify-between shadow-md ">
+    <div className="mt-4 border p-4 flex flex-col gap-4 justify-between shadow-md hover:shadow-xl hover:cursor-pointer">
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2 justify-between">
           <h1 className="text-base font-semibold basis-[270px]">{title}</h1>
@@ -46,11 +47,11 @@ export default function TipsItem({
             />
           </button>
         </div>
-        <p className="text-[15px]">{content}</p>
+        <TrimContent content={content} />
       </div>
 
       <div>
-        <div className="mb-4">
+        <div className="mb-4 flex justify-between">
           <Tag>
             <img
               src={tip.categories?.image}
@@ -59,16 +60,18 @@ export default function TipsItem({
             />
             {categories?.name}
           </Tag>
-        </div>
-        <div className="text-sm flex items-center justify-between text-slate-600">
-          <div className="flex gap-1 items-center bg-slate-200 px-2 py-1 rounded-full cursor-pointer">
+          <div className="flex gap-1 items-center  px-2 py-1 rounded-full cursor-pointer">
             {profiles?.avatar ? (
               <img src={profiles.avatar} alt="" className="w-6 rounded-full" />
             ) : (
               <HiUserCircle className="w-6 h-6 fill-stone-500 " />
             )}
-            <p className="">{isCurrentUser ? "You" : profiles?.username}</p>
+            <p className="text-[15px]">
+              {isCurrentUser ? "You" : profiles?.username}
+            </p>
           </div>
+        </div>
+        <div className="text-sm text-right text-slate-600">
           <p className="italic">{formatDateTime(created_at)}</p>
         </div>
       </div>

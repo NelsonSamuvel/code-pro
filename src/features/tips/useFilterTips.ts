@@ -8,29 +8,29 @@ import {
   differenceInSeconds,
 } from "date-fns";
 import { TipsType } from "../../services/apiTips";
+import { useFilterCategories } from "../../store/useFilterCategories";
 
 type Name = "title" | "created_at";
 type Direction = "asc" | "desc";
 
 export const useFilterTips = (tips: TipsType[]): TipsType[] => {
-  const [searchParams] = useSearchParams();
   const searchTip = useSearchFilter((state) => state.searchTip);
   const sortTip = useSearchFilter((state) => state.sortTip);
-  const categoryVal = searchParams.get("category") || "all";
+  const filterCategory = useFilterCategories((state) => state.filterCategory);
 
   const filteredTips = useMemo(() => {
-    if (categoryVal === "all") {
+    if (filterCategory === "all") {
       return tips;
     }
-    return tips?.filter((tip) => tip.categories?.name === categoryVal);
-  }, [tips, categoryVal]);
+    return tips?.filter((tip) => tip.categories?.name === filterCategory);
+  }, [tips, filterCategory]);
 
   const searchedTip = useMemo(() => {
     return filteredTips?.filter(
       (tip) =>
         tip.title.toLowerCase().includes(searchTip.toLowerCase()) ||
         tip.content.toLowerCase().includes(searchTip.toLowerCase()) ||
-        tip.categories.keywords.includes(searchTip.toLowerCase())
+        tip.categories?.keywords.includes(searchTip.toLowerCase())
     );
   }, [searchTip, filteredTips]);
 
