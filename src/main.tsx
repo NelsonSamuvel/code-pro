@@ -87,7 +87,7 @@ createRoot(rootElement).render(
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
 
-      <ReactQueryDevtools />
+      {/* <ReactQueryDevtools /> */}
       <Toaster
         position="top-center"
         gutter={8}
