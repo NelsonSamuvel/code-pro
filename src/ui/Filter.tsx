@@ -2,26 +2,18 @@ import { useSearchParams } from "react-router-dom";
 import { capitalize } from "../helpers/utils";
 import { OptionType } from "./Dropdown";
 import { useEffect } from "react";
+import { useFilterCategories } from "../store/useFilterCategories";
 
 type OptionsType = {
   options: OptionType[];
 };
 
 function Filter({ options }: OptionsType) {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { filterCategory, setFilterCategory } = useFilterCategories();
 
-  const catVal = searchParams.get("category");
-
-  useEffect(() => {
-    if (!catVal) {
-      searchParams.set("category", "all");
-      setSearchParams(searchParams);
-    }
-  }, []);
 
   function handleClick(value: string): void {
-    searchParams.set("category", value);
-    setSearchParams(searchParams);
+    setFilterCategory(value);
   }
 
   const curCategoryStyle = `border-b-2 pb-1  border-stone-700 transition-all duration-200`;
@@ -31,7 +23,7 @@ function Filter({ options }: OptionsType) {
       {options.map((option) => (
         <div
           key={option.value}
-          className={`${option.value == catVal && curCategoryStyle} ${""}`}
+          className={`${option.value == filterCategory && curCategoryStyle} ${""}`}
         >
           <button
             className="hover:bg-stone-200 px-2 py-1 rounded-sm"

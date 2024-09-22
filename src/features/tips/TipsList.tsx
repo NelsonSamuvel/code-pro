@@ -7,22 +7,17 @@ import { useFilterTips } from "./useFilterTips";
 import { useTips } from "./UseTips";
 import { useFavorites } from "../favorites/useFavorites";
 import { useAddRemoveFavorites } from "../favorites/useAddRemoveFavorites";
-import { useEffect } from "react";
-import { useGlobalLoading } from "../../store/useGlobalLoading";
 
 function TipsList() {
   const view = useSearchFilter((state) => state.view);
 
-  const setGlobalLoading = useGlobalLoading((state) => state.setGlobalLoading);
-
-  const { tips, isLoading, isSuccess, isError } = useTips();
+  const { tips, isLoading } = useTips();
 
   const { favorites, isLoading: isLoadingFavorites } = useFavorites();
 
   const { addToFavorites, isAdding } = useAddRemoveFavorites();
 
   const sortedTips = useFilterTips(tips?.length ? tips : []);
-
 
   // useEffect(()=>{
   //   if(isLoading){
@@ -34,7 +29,7 @@ function TipsList() {
   //   }
   // },[isLoading])
 
-  if(isLoading) return <Spinner/>
+  if (isLoading || isLoadingFavorites) return <Spinner />;
 
   if (!sortedTips) return null;
 
@@ -43,7 +38,7 @@ function TipsList() {
   const favoriteTip = favorites?.map((favorite) => favorite.id);
 
   return (
-    <>
+    <div className="max-container">
       <ul className={`${gridView}`}>
         {sortedTips.map((tip) => (
           <TipsItem
@@ -55,7 +50,7 @@ function TipsList() {
           />
         ))}
       </ul>
-    </>
+    </div>
   );
 }
 

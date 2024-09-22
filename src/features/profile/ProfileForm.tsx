@@ -49,7 +49,7 @@ const ProfileForm = ({ profile }: PropsType) => {
   if (avatar) {
     const avatarArr = avatar.split("/");
     avatarState = avatarArr[avatarArr.length - 1].split("?")[0];
-  } else if (currentAvatar.length) {
+  } else if (currentAvatar?.length) {
     avatarState = currentAvatar[0].name;
   }
 

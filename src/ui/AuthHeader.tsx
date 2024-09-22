@@ -13,7 +13,7 @@ function AuthHeader() {
       <Logo />
       <div className="space-x-4">
         <Link to="/contact">
-          <button className="nav-btn">Contact</button>
+          <button className="nav-btn  font-montserrat">Contact</button>
         </Link>
         <Link to={`/${isLoginPage ? "signup" : "login"}`}>
           <Button type="secondary" disabled={false}>

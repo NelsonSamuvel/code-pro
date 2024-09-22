@@ -1,6 +1,6 @@
 import { useLogout } from "../features/authentication/useLogout";
 import { useOutsideClick } from "../hooks/useOutsideClick";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SideMenu from "../components/menus/SideMenu";
 import ProfileMenu from "../components/menus/ProfileMenu";
 
@@ -27,7 +27,7 @@ const MenuPage = ({ handleMenu }: PropsType) => {
   return (
     <div
       ref={ref}
-      className=" flex flex-col gap-2 items-start  fixed left-0 right-0 top-16 bottom-0  border-b-2 shadow-sm sm:left-auto sm:bottom-auto sm:right-4 sm:mt-4 bg-white sm:border sm:rounded-md p-4 z-10"
+      className="font-montserrat font-medium flex flex-col gap-2 items-start  fixed left-0 right-0 top-16 bottom-0  border-b-2 shadow-sm sm:left-auto sm:bottom-auto sm:right-4 sm:mt-4 bg-white sm:border sm:rounded-md p-4 z-10"
     >
       <SideMenu onNavigate={handleNavigateBtn} />
       <ProfileMenu

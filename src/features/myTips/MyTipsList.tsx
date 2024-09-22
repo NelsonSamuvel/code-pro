@@ -7,13 +7,11 @@ import Modal from "../../ui/Modal";
 import AddTipsModal from "../../ui/AddTipsModal";
 
 const MyTipsList = () => {
-
   const { myTips, isLoading, error } = useMyTips();
 
   if (isLoading) return <Spinner />;
 
   if (error) return <p className="flex">{error.message}</p>;
-  if ( !myTips?.length) return <EmptyData name="Tips" />;
 
   return (
     <Menu>
@@ -23,11 +21,15 @@ const MyTipsList = () => {
             <h1 className="h1">My Tips</h1>
             <AddTipsModal />
           </div>
-          <ul>
-            {myTips.map((tip) => (
-              <MyTipsItem key={tip.id} tip={tip} category={tip.category} />
-            ))}
-          </ul>
+          {!myTips?.length ? (
+            <EmptyData name="Tips" />
+          ) : (
+            <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {myTips.map((tip) => (
+                <MyTipsItem key={tip.id} tip={tip} category={tip.category} />
+              ))}
+            </ul>
+          )}
         </section>
       </Modal>
     </Menu>
