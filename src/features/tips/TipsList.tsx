@@ -38,7 +38,7 @@ function TipsList() {
   const favoriteTip = favorites?.map((favorite) => favorite.id);
 
   return (
-    <>
+    <div className="max-container">
       <ul className={`${gridView}`}>
         {sortedTips.map((tip) => (
           <TipsItem
@@ -50,7 +50,7 @@ function TipsList() {
           />
         ))}
       </ul>
-    </>
+    </div>
   );
 }
 

@@ -3,6 +3,10 @@
     text-stone-700;
 }
 
+.max-container {
+  @apply max-w-screen-xl mx-auto;
+}
+
 .custom-icons {
   @apply w-6 h-6 sm:w-6 sm:h-8 text-stone-800;
 }
@@ -12,7 +16,7 @@
 }
 
 .logo {
-  @apply inline-block px-2 py-2 sm:px-2.5 sm:py-1.5 rounded-full border bg-stone-800;
+  @apply inline-block px-2 py-2 sm:px-2.5 sm:py-1.5 rounded-full border bg-black-stone;
 }
 
 .rounded-icon {
@@ -36,7 +40,7 @@
 }
 
 .tag {
-  @apply  bg-blue-100 text-[13px] text-blue-700 inline-block mt-2  px-3 py-1.5 rounded-full;
+  @apply bg-blue-100 text-[13px] text-blue-700 inline-block mt-2  px-3 py-1.5 rounded-full;
 }
 
 .textarea {
@@ -47,7 +51,10 @@
   @apply disabled:bg-gray-200 disabled:border-none;
 }
 
+.grid-card {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4;
+}
 
-.grid-card{
-  @apply grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4
+.profile-img {
+  @apply w-6 rounded-full;
 }

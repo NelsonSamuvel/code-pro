@@ -8,6 +8,8 @@ import { TipsType } from "../../services/apiTips";
 import Tag from "../../ui/Tag";
 import { HiUserCircle } from "react-icons/hi2";
 import TrimContent from "./TrimContent";
+import UserCard from "../../components/user/UserCard";
+import { ProfilesType } from "../../services/apiProfiles";
 
 export type TipType = {
   tip: TipsType;
@@ -33,7 +35,7 @@ export default function TipsItem({
   const isStarred = isFavorite ? "fill-yellow-400 stroke-none w-6 h-6" : "";
 
   return (
-    <div className="mt-4 border p-4 flex flex-col gap-4 justify-between shadow-md hover:shadow-xl hover:cursor-pointer">
+    <div className="relative mt-4 border p-4 flex flex-col gap-4 justify-between shadow-md hover:shadow-xl hover:cursor-pointer">
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2 justify-between">
           <h1 className="text-base font-semibold basis-[270px]">{title}</h1>
@@ -60,15 +62,18 @@ export default function TipsItem({
             />
             {categories?.name}
           </Tag>
-          <div className="flex gap-1 items-center  px-2 py-1 rounded-full cursor-pointer">
+          <div className="flex gap-1 items-center  px-2 py-1 rounded-full cursor-pointer group">
             {profiles?.avatar ? (
-              <img src={profiles.avatar} alt="" className="w-6 rounded-full" />
+              <img src={profiles.avatar} alt="" className="profile-img" />
             ) : (
               <HiUserCircle className="w-6 h-6 fill-stone-500 " />
             )}
-            <p className="text-[15px]">
-              {isCurrentUser ? "You" : profiles?.username}
-            </p>
+            <div className="">
+              <p className="text-[15px]">
+                {isCurrentUser ? "You" : profiles?.username}
+              </p>
+              {/* <UserCard profile={profiles as ProfilesType} /> */}
+            </div>
           </div>
         </div>
         <div className="text-sm text-right text-slate-600">

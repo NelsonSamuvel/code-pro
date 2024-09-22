@@ -7,7 +7,7 @@ type PropsType = {
 
 export default function NavbarList({ handleMenu }: PropsType) {
   return (
-    <div className="space-x-4 hidden sm:block relative">
+    <div className="space-x-4 hidden sm:block relative font-montserrat font-medium">
       <NavLink
         to="/tips"
         className={({ isActive }) =>

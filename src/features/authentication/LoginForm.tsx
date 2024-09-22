@@ -6,8 +6,8 @@ import { useLogin } from "./useLogin";
 import FormLayout from "../../ui/FormLayout";
 
 function LoginForm() {
-  const [email, setEmail] = useState("nelson@gmail.com");
-  const [password, setPassword] = useState("qwerty");
+  const [email, setEmail] = useState("test@gmail.com");
+  const [password, setPassword] = useState("12344321");
 
   const { login, isLoggingIn } = useLogin();
 

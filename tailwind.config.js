@@ -4,8 +4,14 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Poppins", "sans-serif"],
+        montserrat: ["Montserrat", "sans-serif"],
         outfit: ["Outfit", "system-ui"],
+      },
+      colors: {
+        "black-stone": "#2A2B2E",
+        snow: "#FFFBFE",
+        grey: "#838E83",
+        "violet": "#735CDD",
       },
     },
   },
