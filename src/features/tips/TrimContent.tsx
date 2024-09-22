@@ -12,7 +12,7 @@ const TrimContent = ({ content }: PropsType) => {
   );
 
   return (
-    <p className="text-[15px]">
+    <p className="text-base leading-7  text-gray-700">
       {trimContent ? `${splitContent.slice(0, 20).join(" ")} ` : content}
       {trimContent && spanBtn}
     </p>
