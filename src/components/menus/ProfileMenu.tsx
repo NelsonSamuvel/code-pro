@@ -38,7 +38,7 @@ const ProfileMenu = ({ onNavigate, onLogout, isLoggingOut }: PropsType) => {
             />
           </div>
         ) : (
-          <HiUserCircle className="" />
+          <HiUserCircle className="w-6 h-6 fill-stone-500" />
         )}
       </div>
       <NavLink to="/dashboard" className={mainNav}>

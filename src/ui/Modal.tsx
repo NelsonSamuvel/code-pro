@@ -56,9 +56,9 @@ function Window({ children, name }: Partial<ModalType>) {
   const closeModals: onCloseProp = { onCloseModal: close };
 
   return (
-    <div className="fixed inset-0 bg-slate-400/20 backdrop-blur-sm z-20">
+    <div className="fixed inset-0 bg-slate-400/20 backdrop-blur-sm z-20 flex justify-center items-center">
       <div
-        className="fixed w-[350px] sm:w-[600px] left-[50%] -translate-x-1/2  mt-10 p-4 flex flex-col bg-white rounded-md"
+        className="fixed w-[350px] sm:w-[600px]   mt-10 p-4 flex flex-col bg-white rounded-md"
         ref={ref}
       >
         {cloneElement(children as ReactElement, closeModals)}

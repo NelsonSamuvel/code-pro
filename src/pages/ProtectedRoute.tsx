@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useAuth } from "../features/authentication/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Spinner from "../ui/Spinner";
 
 //types
@@ -15,9 +15,7 @@ function ProtectedRoute({ children }: ChildrenType) {
     if (!isAuthenticated && !isLoading) navigate("/login", { replace: true });
   }, [isAuthenticated, isLoading, navigate]);
 
-  // if (isLoading) return <Spinner />;
-
-  if (isAuthenticated) return children;
+  return children;
 }
 
 export default ProtectedRoute;

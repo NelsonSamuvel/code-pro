@@ -112,7 +112,7 @@ const ProfileForm = ({ profile }: PropsType) => {
           <div className="flex items-center gap-4">
             <label
               htmlFor="avatar"
-              className="w-max bg-stone-800 text-white px-2 py-1 cursor-pointer"
+              className="w-max btn text-white px-2 py-1 cursor-pointer"
             >
               Choose File
             </label>

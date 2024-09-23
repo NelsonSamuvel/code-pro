@@ -35,7 +35,7 @@ export default function TipsItem({
   const isStarred = isFavorite ? "fill-yellow-400 stroke-none w-6 h-6" : "";
 
   return (
-    <div className="relative mt-4 border p-4 flex flex-col gap-4 justify-between shadow-md hover:shadow-xl hover:cursor-pointer">
+    <div className="relative rounded-md mt-4 border px-6 py-8 flex flex-col gap-4 justify-between shadow-md hover:shadow-xl hover:cursor-pointer">
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2 justify-between">
           <h1 className="font-semibold basis-[270px] text-lg">{title}</h1>
@@ -45,7 +45,7 @@ export default function TipsItem({
             onClick={() => addToFavorites(id as number)}
           >
             <HiOutlineStar
-              className={`w-5 h-5 cursor-pointer self-start ${isStarred} cursor-pointer`}
+              className={`w-5 h-5   cursor-pointer self-start ${isStarred} cursor-pointer`}
             />
           </button>
         </div>

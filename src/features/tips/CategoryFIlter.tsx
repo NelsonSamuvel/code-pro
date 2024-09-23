@@ -3,11 +3,13 @@ import { OptionType } from "../../ui/Dropdown";
 import Filter from "../../ui/Filter";
 import { useCategories } from "./useCategories";
 
-function CategoryFIlter() {
-  const { categories } = useCategories();
+type PropsType = {
+  categories: CategoriesType[];
+};
 
+function CategoryFIlter({ categories }: PropsType) {
   return (
-    <div className="flex items-start lg:text-lg justify-center flex-wrap gap-2 sm:gap-4 p-2 mt-2 max-w-lg mx-auto">
+    <div className="flex items-start text-lg justify-center flex-wrap gap-2 sm:gap-4 py-8 max-w-lg mx-auto">
       <Filter
         options={
           categories?.reduce(

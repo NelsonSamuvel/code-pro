@@ -12,19 +12,19 @@ const FavoriteItem = ({ favorite, isAdding, addToFavorites }: PropsType) => {
   const { title, content, categories, id } = favorite;
 
   return (
-    <div className="mt-4 border p-4 flex flex-col gap-4 justify-between shadow-md cursor-pointer">
+    <div className="mt-4 rounded-md border p-4 flex flex-col gap-4 justify-between shadow-md cursor-pointer">
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2 justify-between">
           <h1 className="text-base font-semibold basis-[270px]">{title}</h1>
           <button
-          className="self-start"
+            className="self-start"
             disabled={isAdding}
             onClick={() => addToFavorites(id as number)}
           >
             <HiOutlineStar className="w-6 h-6 cursor-pointer self-start fill-yellow-400 stroke-none" />
           </button>
         </div>
-        <p className="text-[15px]">{content}</p>
+        <p className="info-text">{content}</p>
       </div>
 
       <div>

@@ -2,7 +2,7 @@ import { checkAuth } from "./apiAuth";
 import { TipsType } from "./apiTips";
 import supabase from "./supabase";
 
-type FavoriteType = {
+export type FavoriteType = {
   id: number;
   tip_id: number;
   user_id: string;

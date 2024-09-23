@@ -64,7 +64,7 @@ export default function Searchbar() {
         />
 
         <ul
-          className={`${isHidden} sm:hidden fixed border-2 bottom-0 w-full bg-white px-6 py-2 left-0  space-y-2`}
+          className={`${isHidden} sm:hidden z-20 fixed border-2 bottom-0 w-full bg-white px-6 py-6 pt-10 left-0 rounded-lg  space-y-2`}
         >
           {options?.map((option) => {
             const activeSort = option.value === sortTip ? "bg-stone-200" : "";

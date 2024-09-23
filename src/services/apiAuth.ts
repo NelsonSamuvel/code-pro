@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import supabase from "./supabase";
 
 type RegisterType = {
@@ -57,23 +58,18 @@ export async function login({ email, password }: LoginType) {
   if (error) {
     throw new Error("Invalid Email or Password");
   }
-
-  console.log(data);
-
   return data;
 }
 
 export async function checkAuth() {
-  const { data: session } = await supabase.auth.getSession();
-
-  if (!session.session) return null;
-
-  const { data: user, error } = await supabase.auth.getUser();
+  const { data: session, error } = await supabase.auth.getSession();
 
   if (error) {
     throw new Error("Invalid login");
   }
-  return user.user;
+  if (!session.session) return null;
+
+  return session.session.user;
 }
 
 export async function logout(): Promise<void> {
