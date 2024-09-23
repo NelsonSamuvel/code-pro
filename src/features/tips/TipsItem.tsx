@@ -38,7 +38,7 @@ export default function TipsItem({
     <div className="relative mt-4 border p-4 flex flex-col gap-4 justify-between shadow-md hover:shadow-xl hover:cursor-pointer">
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2 justify-between">
-          <h1 className="text-base font-semibold basis-[270px] lg:text-lg">{title}</h1>
+          <h1 className="font-semibold basis-[270px] text-lg">{title}</h1>
           <button
             className="disabled:cursor-not-allowed self-start"
             disabled={isAdding}
