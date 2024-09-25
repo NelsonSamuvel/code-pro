@@ -1,9 +1,10 @@
 import { cva } from "class-variance-authority";
 import { cn } from "../../utils/cn";
 
-type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
+interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
-};
+  disabled?: boolean;
+}
 
 const btnVariants = cva("px-4 py-2.5 rounded-md font-semibold text-lg", {
   variants: {
@@ -17,9 +18,19 @@ const btnVariants = cva("px-4 py-2.5 rounded-md font-semibold text-lg", {
   },
 });
 
-const Button = ({ children, variant, className, ...props }: ButtonProps) => {
+const Button = ({
+  children,
+  variant,
+  disabled = false,
+  className,
+  ...props
+}: ButtonProps) => {
   return (
-    <button {...props} className={cn(btnVariants({ variant }), className)}>
+    <button
+      disabled={disabled}
+      {...props}
+      className={cn(btnVariants({ variant }), className)}
+    >
       {children}
     </button>
   );

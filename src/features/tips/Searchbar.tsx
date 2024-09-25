@@ -1,6 +1,6 @@
 import { HiSearch } from "react-icons/hi";
 import { HiEllipsisHorizontal, HiMiniPlus } from "react-icons/hi2";
-import Dropdown from "../../ui/Dropdown";
+import DropDown from "../../ui/Dropdown";
 import Modal from "../../ui/Modal.jsx";
 import AddTipsForm from "./AddTipsForm";
 import LayoutOptions from "../../ui/LayoutOptions";
@@ -47,7 +47,7 @@ export default function Searchbar() {
 
           <HiSearch className="h-5 w-5 stroke-slate-500 fill-slate-500 absolute top-[11px] left-2" />
           <div
-            className="absolute top-0 right-0 flex items-center justify-center hover:bg-stone-200 rounded-md w-10 h-12 text-center cursor-pointer md:hidden"
+            className="absolute top-0 right-0 flex items-center justify-center hover:bg-stone-100 rounded-md w-10 h-12 text-center cursor-pointer md:hidden"
             onClick={() => setHideFilters((prev) => !prev)}
           >
             <button className="absolute top-2.5">
@@ -56,9 +56,8 @@ export default function Searchbar() {
           </div>
         </div>
 
-        <Dropdown
+        <DropDown
           isHide={true}
-          updateSortTip={updateSortTip}
           name="sort"
           value={sortTip}
           onChange={(e) => updateSortTip(e.target.value)}
@@ -69,7 +68,7 @@ export default function Searchbar() {
           className={`${isHidden} md:hidden z-20 fixed border-2 bottom-0 w-full bg-white px-6 py-6 pt-10 left-0 rounded-lg  space-y-2`}
         >
           {options?.map((option) => {
-            const activeSort = option.value === sortTip ? "bg-stone-200" : "";
+            const activeSort = option.value === sortTip ? "bg-stone-100" : "";
             return (
               <li
                 key={option.value}

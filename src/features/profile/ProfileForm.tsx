@@ -3,10 +3,11 @@ import FormRow from "../../ui/FormRow";
 import { useUpdateProfile } from "./useUpdateProfile";
 import { HiEyeOff } from "react-icons/hi";
 import { HiEye } from "react-icons/hi2";
-import Button from "../../ui/Button";
+import Button from "../../components/ui/Button";
 import { ProfilesType } from "../../services/apiProfiles";
 import { useAuth } from "../authentication/useAuth";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import Input from "../../components/ui/Input";
 
 type PropsType = {
   profile: ProfilesType;
@@ -73,7 +74,7 @@ const ProfileForm = ({ profile }: PropsType) => {
       <h2 className="text-xl font-semibold">Account Settings</h2>
       <form action="" onSubmit={handleSubmit(onSubmit)}>
         <FormRow label="Email">
-          <input
+          <Input
             type="text"
             id="email"
             className="input cursor-not-allowed disabled-input"
@@ -82,7 +83,7 @@ const ProfileForm = ({ profile }: PropsType) => {
           />
         </FormRow>
         <FormRow label="Username" error={errors.username?.message}>
-          <input
+          <Input
             id="username"
             type="text"
             className="input disabled-input"
@@ -137,7 +138,7 @@ const ProfileForm = ({ profile }: PropsType) => {
             )
           }
         >
-          <input
+          <Input
             id="password"
             type={showPassword ? "text" : "password"}
             className="input disabled-input"

@@ -1,43 +1,43 @@
-import { RegisterOptions } from "react-hook-form";
-import { HiViewGrid, HiViewList } from "react-icons/hi";
+import { cva } from "class-variance-authority";
+import { ForwardedRef, forwardRef, SelectHTMLAttributes } from "react";
 
 export interface OptionType {
   label: string;
   value: string;
 }
 
-interface DropDownType {
+interface DropDownTypes extends SelectHTMLAttributes<HTMLSelectElement> {
   options: OptionType[];
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  name: string;
   isHide?: boolean;
-  value: string | number;
-  updateSortTip?: (val: string) => void;
 }
 
-export default function Dropdown({
-  options,
-  name,
-  value,
-  isHide = false,
-  onChange,
-}: DropDownType) {
-  const hide = isHide ? "hidden" : "";
+const DropDown = forwardRef(
+  (
+    { options, isHide = false, ...props }: DropDownTypes,
+    ref: ForwardedRef<HTMLSelectElement>
+  ) => {
+    const hide = isHide ? "hidden" : "";
 
-  return (
-    <>
-      <select
-        value={value}
-        onChange={onChange}
-        name={name}
-        className={`input ${hide} md:block text-sm font-semibold font-montserrat py-2.5`}
-      >
-        {options?.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </>
-  );
-}
+    return (
+      <>
+        <select
+          ref={ref}
+          {...props}
+          className={`input ${hide} md:block text-sm font-bold font-montserrat py-2.5`}
+        >
+          {options?.map((option) => (
+            <option
+              key={option.value}
+              value={option.value}
+              className="font-semibold tracking-wide"
+            >
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </>
+    );
+  }
+);
+
+export default DropDown;

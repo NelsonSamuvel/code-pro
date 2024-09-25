@@ -3,6 +3,7 @@ import FormRow from "../../ui/FormRow";
 import Button from "../../ui/Button";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useSignup } from "./useSignup";
+import Input from "../../components/ui/Input";
 
 type FormData = {
   fullName: string;
@@ -46,30 +47,30 @@ Code pro Account 🚀"
     >
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormRow label="Full Name" error={errors?.fullName?.message}>
-          <input
+          <Input
+            type="text"
             className="input"
             id="fullName"
-            type="text"
             {...register("fullName", {
               required: "This Field is required",
             })}
           />
         </FormRow>
         <FormRow label="Username" error={errors?.username?.message}>
-          <input
+          <Input
+            type="text"
             className="input"
             id="username"
-            type="text"
             {...register("username", {
               required: "This Field is required",
             })}
           />
         </FormRow>
         <FormRow label="Email" error={errors?.email?.message}>
-          <input
+          <Input
             className="input"
             id="email"
-            type="text"
+            type="email"
             {...register("email", {
               required: "This Field is required",
               pattern: {
@@ -80,7 +81,7 @@ Code pro Account 🚀"
           />
         </FormRow>
         <FormRow label="Password" error={errors?.password?.message}>
-          <input
+          <Input
             className="input"
             id="password"
             type="password"
@@ -98,7 +99,7 @@ Code pro Account 🚀"
           label="Confirm Password"
           error={errors?.confirmPassword?.message}
         >
-          <input
+          <Input
             id="confirmPassword"
             type="password"
             disabled={isSigning}

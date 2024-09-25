@@ -1,9 +1,10 @@
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import Button from "../../components/ui/Button";
 import FormRow from "../../ui/FormRow";
 
 import { useLogin } from "./useLogin";
 import FormLayout from "../../ui/FormLayout";
+import Input from "../../components/ui/Input";
 
 function LoginForm() {
   const [email, setEmail] = useState("test@gmail.com");
@@ -28,12 +29,14 @@ function LoginForm() {
     <FormLayout title="Login Form">
       <form onSubmit={handleSubmit}>
         <FormRow label="Email">
-          <input
+          <Input
             className="input disabled-input"
             type="text"
             id="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setEmail(e.target.value)
+            }
             disabled={isLoggingIn}
           />
         </FormRow>

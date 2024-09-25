@@ -1,6 +1,6 @@
 function Spinner() {
   return (
-    <div className="flex justify-center items-center mt-32">
+    <div className="flex justify-center items-center h-[75vh]">
       <div role="status">
         <svg
           aria-hidden="true"

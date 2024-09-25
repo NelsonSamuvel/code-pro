@@ -1,8 +1,7 @@
 import { FormEvent, useState } from "react";
-import Button from "../../ui/Button";
-import { OptionType } from "../../ui/Dropdown";
+import Button from "../../components/ui/Button";
+import DropDown, { OptionType } from "../../ui/Dropdown";
 import FormRow from "../../ui/FormRow";
-import SpinnerMini from "../../ui/SpinnerMini";
 import { useCategories } from "./useCategories";
 import { format } from "date-fns";
 import { useAuth } from "../authentication/useAuth";
@@ -13,6 +12,8 @@ import { onCloseProp } from "../../ui/Modal";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useEditTips } from "../myTips/useEditTips";
 import { MenuContextType } from "../../ui/Menu";
+import Input from "../../components/ui/Input";
+import Spinner from "../../ui/Spinner";
 
 type FormData = {
   title: string;
@@ -46,7 +47,7 @@ function AddTipsForm({
   category,
   closeMenu,
 }: onCloseProp & TipEditType) {
-  const { categories, isLoading } = useCategories();
+  const { categories, isLoading: isLoadingCategories } = useCategories();
   const { user } = useAuth();
   const { addTip, isAdding } = useAddTip();
   const { updateTips, isUpdating } = useEditTips();
@@ -64,6 +65,9 @@ function AddTipsForm({
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+
+    console.log(data);
+
     const { title, content, category } = data;
 
     const editTips = {
@@ -117,71 +121,58 @@ function AddTipsForm({
           <HiXMark className="custom-icons" />
         </button>
       </div>
-      <>
-        <FormRow label="Title" error={errors.title?.message}>
-          <input
-            className="input"
-            type="text"
-            id="title"
-            disabled={isAdding}
-            {...register("title", {
-              required: {
-                value: true,
-                message: "This Field is required",
-              },
-              minLength: {
-                value: 3,
-                message: "Title must be at least 3 characters",
-              },
-            })}
-          />
-        </FormRow>
 
-        <FormRow label="Content" error={errors.content?.message}>
-          <textarea
-            className="input h-32"
-            id="content"
-            {...register("content", {
-              required: {
-                value: true,
-                message: "This Field is required",
-              },
-              validate: (value) => {
-                return (
-                  value.split(" ").length >= 5 ||
-                  "The description should have at least 5 words and above"
-                );
-              },
-            })}
-          />
-        </FormRow>
-        <FormRow label="Choose Language" error={errors.category?.message}>
-          {isLoading ? (
-            <SpinnerMini />
-          ) : (
-            <select
-              className={`input text-sm font-semibold py-2.5`}
-              {...register("category", {
+      {!isLoadingCategories ? (
+        <>
+          <FormRow label="Title" error={errors.title?.message}>
+            <Input
+              className="input"
+              type="text"
+              id="title"
+              disabled={isAdding}
+              {...register("title", {
                 required: {
                   value: true,
-                  message: "this field is required",
+                  message: "This Field is required",
+                },
+                minLength: {
+                  value: 3,
+                  message: "Title must be at least 3 characters",
                 },
               })}
-            >
-              {optionTypes?.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          )}
-        </FormRow>
-        <FormRow>
-          <Button disabled={isAdding || isUpdating}>
-            {isEdit ? "Update" : "Add"}
-          </Button>
-        </FormRow>
-      </>
+            />
+          </FormRow>
+
+          <FormRow label="Content" error={errors.content?.message}>
+            <textarea
+              className="input h-32"
+              id="content"
+              {...register("content", {
+                required: {
+                  value: true,
+                  message: "This Field is required",
+                },
+                validate: (value) => {
+                  return (
+                    value.split(" ").length >= 5 ||
+                    "The description should have at least 5 words and above"
+                  );
+                },
+              })}
+            />
+          </FormRow>
+          <FormRow label="Choose Language" error={errors.category?.message}>
+            <DropDown options={optionTypes} {...register("category")} />
+          </FormRow>
+          <FormRow>
+            <Button disabled={isAdding || isUpdating}>
+              {isEdit ? "Update" : "Add"}
+            </Button>
+          </FormRow>
+        </>
+      ) : (
+        <Spinner />
+      )}
     </form>
     // </FormLayout>
   );

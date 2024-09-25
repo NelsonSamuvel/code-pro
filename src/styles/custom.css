@@ -24,7 +24,7 @@
 }
 
 .btn {
-  @apply bg-black-stone p-2 text-white rounded-sm text-lg;
+  @apply bg-stone-900 p-2 text-white rounded-sm text-lg;
 }
 
 .active {

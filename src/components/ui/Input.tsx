@@ -1,9 +1,9 @@
 import { cva } from "class-variance-authority";
 import { cn } from "../../utils/cn";
+import { ForwardedRef, forwardRef } from "react";
 
-type InputProps = React.HTMLAttributes<HTMLInputElement> & {
+type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   variant?: "primary";
-  value: string;
 };
 
 const inputVariants = cva(
@@ -21,10 +21,19 @@ const inputVariants = cva(
   }
 );
 
-const Input = ({ className, variant, ...props }: InputProps) => {
-  return (
-    <input {...props} className={cn(inputVariants({ variant }), className)} />
-  );
-};
+const Input = forwardRef(
+  (
+    { className, variant, ...props }: InputProps,
+    ref: ForwardedRef<HTMLInputElement>
+  ) => {
+    return (
+      <input
+        ref={ref}
+        {...props}
+        className={cn(inputVariants({ variant }), className)}
+      />
+    );
+  }
+);
 
 export default Input;
