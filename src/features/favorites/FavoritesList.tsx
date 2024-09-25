@@ -27,7 +27,7 @@ const FavoritesList = () => {
   return (
     <div className="border-b border-stone-500 pb-8">
       <div
-        className="hover:bg-stone-200 flex items-center gap-2 p-1 rounded-sm w-max pr-2 cursor-pointer"
+        className="hover:bg-stone-100 flex items-center gap-2 py-2 px-4 rounded-sm w-max pr-2 cursor-pointer"
         onClick={() => setShowFavorites((show) => !show)}
       >
         {showFavorites ? <HiChevronDown /> : <HiChevronRight />}

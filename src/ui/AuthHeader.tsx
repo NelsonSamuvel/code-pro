@@ -1,7 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import Logo from "./Logo";
-import Button from "./Button";
-
+import Button from "../components/ui/Button";
 
 function AuthHeader() {
   const location = useLocation();
@@ -16,7 +15,7 @@ function AuthHeader() {
           <button className="nav-btn  font-montserrat">Contact</button>
         </Link>
         <Link to={`/${isLoginPage ? "signup" : "login"}`}>
-          <Button type="secondary" disabled={false}>
+          <Button variant="secondary" className="font-montserrat text-base">
             {isLoginPage ? "Sign Up" : "Login"}
           </Button>
         </Link>

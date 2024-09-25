@@ -30,7 +30,7 @@ export default function Dropdown({
         value={value}
         onChange={onChange}
         name={name}
-        className={`input ${hide} sm:block text-sm font-semibold font-montserrat py-2.5`}
+        className={`input ${hide} md:block text-sm font-semibold font-montserrat py-2.5`}
       >
         {options?.map((option) => (
           <option key={option.value} value={option.value}>

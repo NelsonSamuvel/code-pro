@@ -8,7 +8,7 @@ import { TipsType } from "../../services/apiTips";
 
 type PropsType = {
   tips: TipsType[];
-  favorites: TipsType[];
+  favorites?: TipsType[];
 };
 
 function TipsList({ tips, favorites }: PropsType) {

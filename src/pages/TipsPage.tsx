@@ -16,7 +16,7 @@ export default function TipsPage() {
   if (isLoading || isLoadingFavorites || isLoadingCategories)
     return <Spinner />;
 
-  if (!categories?.length || !favorites?.length) return null;
+  if (!categories?.length) return null;
 
   console.log(favorites);
 

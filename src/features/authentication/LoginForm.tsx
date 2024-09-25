@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import Button from "../../ui/Button";
+import Button from "../../components/ui/Button";
 import FormRow from "../../ui/FormRow";
 
 import { useLogin } from "./useLogin";
@@ -49,7 +49,7 @@ function LoginForm() {
           />
         </FormRow>
         <FormRow>
-          <Button disabled={isLoggingIn}>Log in</Button>
+          <Button>Log in</Button>
         </FormRow>
       </form>
     </FormLayout>
