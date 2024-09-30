@@ -92,3 +92,20 @@
 .info-text {
   @apply font-outfit text-gray-700 text-base leading-7;
 }
+
+
+.scrlBar::-webkit-scrollbar{
+  @apply w-2 h-2
+}
+
+.scrlBar::-webkit-scrollbar-track{
+  @apply bg-gray-200 cursor-pointer
+}
+
+.scrlBar::-webkit-scrollbar-thumb{
+  @apply bg-gray-500 rounded-lg cursor-pointer
+}
+
+.scrlBar::-webkit-scrollbar-thumb:hover{
+  @apply bg-gray-600;
+}

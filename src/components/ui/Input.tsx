@@ -23,12 +23,13 @@ const inputVariants = cva(
 
 const Input = forwardRef(
   (
-    { className, variant, ...props }: InputProps,
+    { className, placeholder, variant, ...props }: InputProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
       <input
         ref={ref}
+        placeholder={placeholder}
         {...props}
         className={cn(inputVariants({ variant }), className)}
       />

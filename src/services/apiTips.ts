@@ -2,6 +2,8 @@ import supabase from "./supabase";
 import { ProfilesType } from "../types/api/apiTips.type";
 import { CategoriesType } from "./apiCategories";
 import { checkAuth } from "./apiAuth";
+import { uploadImage } from "./apiImage";
+import { TipType } from "../features/tips/AddTipsForm";
 
 export type TipsType = {
   category_id: number;
@@ -24,10 +26,17 @@ export async function getTips(): Promise<TipsType[]> {
   return data;
 }
 
+type AddTipType = {
+  newTip: TipsType;
+  categoryName: string;
+  imageFile: File[];
+};
+
 export async function addTip({
   newTip,
   categoryName,
-}: { newTip: TipsType } & { categoryName: string }): Promise<TipsType> {
+  imageFile,
+}: AddTipType): Promise<TipsType> {
   const { data: category, error: categoryErr } = await supabase
     .from("categories")
     .select("*")
@@ -36,9 +45,18 @@ export async function addTip({
 
   if (categoryErr) throw new Error(categoryErr.message);
 
+  const url = await uploadImage(imageFile);
+
+  console.log(url);
+
+  const addingTip = {
+    ...newTip,
+    image: url,
+  };
+
   const { data, error } = await supabase
     .from("tips")
-    .insert([{ ...newTip, category_id: category.id }])
+    .insert([{ ...addingTip, category_id: category.id }])
     .select()
     .single();
 
@@ -62,9 +80,9 @@ export async function getMyTips(): Promise<MyTipsType[]> {
     .from("tips")
     .select("*, category : categories(id,name,image)")
     .eq("user_id", user.id);
-    
+
   if (error) throw new Error(error.message);
-  
+
   return data as MyTipsType[];
 }
 

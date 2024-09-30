@@ -39,6 +39,7 @@ export default function Searchbar() {
         <div className="relative grow overflow-hidden md:overflow-visible">
           <Input
             className="pl-10 w-full"
+            placeholder="Search tips here..."
             value={searchTip}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               updateSearchTip(e.target.value)

@@ -1,12 +1,18 @@
 //types
 
-import { HiOutlineStar, HiUser } from "react-icons/hi";
+import {
+  HiOutlineCamera,
+  HiOutlinePhotograph,
+  HiOutlineStar,
+  HiUser,
+  HiVideoCamera,
+} from "react-icons/hi";
 import { format } from "date-fns";
 import { formatDateTime } from "../../helpers/utils";
 import { useAuth } from "../authentication/useAuth";
 import { TipsType } from "../../services/apiTips";
 import Tag from "../../ui/Tag";
-import { HiUserCircle } from "react-icons/hi2";
+import { HiOutlineVideoCameraSlash, HiUserCircle } from "react-icons/hi2";
 import TrimContent from "./TrimContent";
 import UserCard from "../../components/user/UserCard";
 import { ProfilesType } from "../../services/apiProfiles";
@@ -16,6 +22,7 @@ export type TipType = {
   favorites: number[];
   isAdding: boolean;
   addToFavorites: (tipId: number) => void;
+  view: string;
 };
 
 export default function TipsItem({
@@ -23,6 +30,7 @@ export default function TipsItem({
   favorites,
   addToFavorites,
   isAdding,
+  view,
 }: TipType) {
   const { title, content, created_at, profiles, categories, id } = tip;
 
@@ -36,6 +44,18 @@ export default function TipsItem({
 
   return (
     <div className="relative rounded-md mt-4 border px-6 py-8 flex flex-col gap-4 justify-between shadow-md hover:shadow-xl hover:cursor-pointer">
+      {view === "grid" ? tip.image ? (
+        <img
+          src={tip.image}
+          alt=""
+          className="rounded-md h-[200px] object-cover"
+        />
+      ) : (
+        <div className="bg-stone-100 h-[200px] rounded-md flex items-center justify-center">
+          <HiOutlinePhotograph className="w-12 h-12 stroke-1 stroke-stone-400" />
+        </div>
+      ): null}
+
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2 justify-between">
           <h1 className="font-semibold basis-[270px] text-lg">{title}</h1>

@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Button from "../../components/ui/Button";
 import DropDown, { OptionType } from "../../ui/Dropdown";
 import FormRow from "../../ui/FormRow";
@@ -6,7 +6,7 @@ import { useCategories } from "./useCategories";
 import { format } from "date-fns";
 import { useAuth } from "../authentication/useAuth";
 import { useAddTip } from "./useAddTip";
-import { HiXMark } from "react-icons/hi2";
+import { HiOutlinePhoto, HiOutlinePlus, HiXMark } from "react-icons/hi2";
 import { CategoriesType } from "../../services/apiCategories";
 import { onCloseProp } from "../../ui/Modal";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -14,11 +14,13 @@ import { useEditTips } from "../myTips/useEditTips";
 import { MenuContextType } from "../../ui/Menu";
 import Input from "../../components/ui/Input";
 import Spinner from "../../ui/Spinner";
+import { HiOutlinePhoneOutgoing, HiPhotograph } from "react-icons/hi";
 
 type FormData = {
   title: string;
   content: string;
   category: string;
+  image: string;
 };
 
 export type TipType = {
@@ -26,6 +28,7 @@ export type TipType = {
   title: string;
   content: string;
   category: string;
+  image: string;
 };
 
 type TipEditType = {
@@ -39,6 +42,7 @@ const defaultTipToEdit: TipType = {
   title: "",
   content: "",
   category: "",
+  image: "",
 };
 
 function AddTipsForm({
@@ -49,6 +53,7 @@ function AddTipsForm({
 }: onCloseProp & TipEditType) {
   const { categories, isLoading: isLoadingCategories } = useCategories();
   const { user } = useAuth();
+
   const { addTip, isAdding } = useAddTip();
   const { updateTips, isUpdating } = useEditTips();
 
@@ -59,21 +64,20 @@ function AddTipsForm({
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<FormData>({
     defaultValues: isEdit ? { ...editValues, category } : {},
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-
-    console.log(data);
-
-    const { title, content, category } = data;
+    const { title, content, category, image } = data;
 
     const editTips = {
       title: title,
       content: content,
       category_name: category,
+      image: image,
     };
 
     if (isEdit) {
@@ -87,6 +91,7 @@ function AddTipsForm({
         }
       );
     } else {
+      console.log("new tip");
       const newTip = {
         title,
         content,
@@ -97,7 +102,7 @@ function AddTipsForm({
         user_id: user?.id ?? "",
       };
       addTip(
-        { newTip, categoryName: category },
+        { newTip, categoryName: category, imageFile: image },
         {
           onSuccess: onCloseModal,
         }
@@ -111,8 +116,18 @@ function AddTipsForm({
       return acc;
     }, []) || [];
 
+  const thumbnail = watch("image");
+  let imageName = "";
+
+  if (thumbnail && thumbnail.length > 0) {
+    imageName = thumbnail[0].name;
+  }
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="overflow-y-scroll p-4 scrlBar"
+    >
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold tracking-wider">
           {isEdit ? `Edit tip#${tipToEdit.id}` : "Add New Tip"}{" "}
@@ -160,6 +175,37 @@ function AddTipsForm({
                 },
               })}
             />
+          </FormRow>
+          <FormRow label="Thumbnail" error={errors.image?.message}>
+            <div className="relative bg-stone-100 rounded-md h-[200px] flex justify-center flex-col gap-4 cursor-not-allowed items-center">
+              <input
+                type="file"
+                id="tb"
+                className="hidden"
+                {...register("image", {
+                  required: "Please select a thumbnail",
+                })}
+              />
+
+              {!imageName ? (
+                <img
+                  src="/assets/svg/image-upload.svg"
+                  alt=""
+                  className="w-1/2 object-cover"
+                />
+              ) : (
+                <>
+                  <p>{imageName}</p>
+                </>
+              )}
+
+              <label
+                htmlFor="tb"
+                className=" bg-stone-900 text-white p-2 rounded-md cursor-pointer"
+              >
+                Upload Image
+              </label>
+            </div>
           </FormRow>
           <FormRow label="Choose Language" error={errors.category?.message}>
             <DropDown options={optionTypes} {...register("category")} />

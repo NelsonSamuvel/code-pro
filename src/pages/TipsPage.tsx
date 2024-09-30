@@ -18,7 +18,6 @@ export default function TipsPage() {
 
   if (!categories?.length) return null;
 
-  console.log(favorites);
 
   return (
     <>

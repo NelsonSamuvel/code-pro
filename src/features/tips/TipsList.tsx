@@ -35,6 +35,7 @@ function TipsList({ tips, favorites }: PropsType) {
             favorites={favoriteTip as number[]}
             isAdding={isAdding}
             addToFavorites={addToFavorites}
+            view = {view}
           />
         ))}
       </ul>

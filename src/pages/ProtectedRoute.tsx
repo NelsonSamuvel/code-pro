@@ -11,11 +11,15 @@ function ProtectedRoute({ children }: ChildrenType) {
 
   const { isAuthenticated, isLoading } = useAuth();
 
+  console.log(isAuthenticated);
+
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) navigate("/login", { replace: true });
+    if (!isAuthenticated && !isLoading) navigate("/login");
   }, [isAuthenticated, isLoading, navigate]);
 
-  return children;
+  // if (isLoading) return <Spinner />;
+
+  if (isAuthenticated) return children;
 }
 
 export default ProtectedRoute;

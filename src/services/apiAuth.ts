@@ -62,14 +62,13 @@ export async function login({ email, password }: LoginType) {
 }
 
 export async function checkAuth() {
-  const { data: session, error } = await supabase.auth.getSession();
-
-  if (error) {
-    throw new Error("Invalid login");
-  }
+  const { data: session } = await supabase.auth.getSession();
   if (!session.session) return null;
 
-  return session.session.user;
+  const { data: user, error } = await supabase.auth.getUser();
+  if (error) throw new Error("failed to get user");
+
+  return user.user;
 }
 
 export async function logout(): Promise<void> {
