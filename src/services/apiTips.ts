@@ -92,6 +92,7 @@ type UpdateTipType = {
     title: string;
     content: string;
     category_name: string;
+    image: File[];
   };
 };
 
@@ -106,10 +107,13 @@ export async function updateTips({ id, editTips }: UpdateTipType) {
 
   if (categoryErr) throw new Error(categoryErr.message);
 
+  const imageUrl = await uploadImage(editTips.image);
+
   const updatingTip = {
     title: editTips.title,
     content: editTips.content,
     category_id: category.id,
+    image: imageUrl,
   };
 
   const { data, error } = await supabase

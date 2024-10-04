@@ -11,8 +11,6 @@ function ProtectedRoute({ children }: ChildrenType) {
 
   const { isAuthenticated, isLoading } = useAuth();
 
-  console.log(isAuthenticated);
-
   useEffect(() => {
     if (!isAuthenticated && !isLoading) navigate("/login");
   }, [isAuthenticated, isLoading, navigate]);

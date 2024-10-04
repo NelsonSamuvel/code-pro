@@ -6,17 +6,20 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
 }
 
-const btnVariants = cva("px-4 py-2.5 rounded-md font-semibold text-lg", {
-  variants: {
-    variant: {
-      primary: "bg-stone-900  text-white hover:bg-stone-800",
-      secondary: "border-2 font-semibold hover:bg-stone-100",
+const btnVariants = cva(
+  "px-4 py-2.5 rounded-md font-semibold text-lg text-center",
+  {
+    variants: {
+      variant: {
+        primary: "bg-stone-900  text-white hover:bg-stone-800",
+        secondary: "border-2 font-semibold hover:bg-stone-100",
+      },
     },
-  },
-  defaultVariants: {
-    variant: "primary",
-  },
-});
+    defaultVariants: {
+      variant: "primary",
+    },
+  }
+);
 
 const Button = ({
   children,

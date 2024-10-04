@@ -64,8 +64,6 @@ type MenuWindowType = {
 function Window({ id, children }: MenuWindowType & ChildrenType) {
   const { selectedId, closeMenu } = useContext(MenuContext);
 
-  console.log(selectedId);
-
   const ref = useOutsideClick(closeMenu);
 
   if (selectedId !== id) return null;

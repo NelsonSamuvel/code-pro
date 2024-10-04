@@ -17,11 +17,9 @@ const mainNav = ({ isActive }: ActiveType) =>
 
 const ProfileMenu = ({ onNavigate, onLogout, isLoggingOut }: PropsType) => {
   const { user } = useAuth();
-
   const { profile } = useProfile();
 
-  console.log(profile?.avatar);
-
+  
   return (
     <>
       <h2 className="text-xl font-semibold mt-4 px-1 sm:hidden">Profile</h2>
@@ -30,11 +28,11 @@ const ProfileMenu = ({ onNavigate, onLogout, isLoggingOut }: PropsType) => {
           {user?.email}
         </p>
         {profile?.avatar ? (
-          <div className="w-8">
+          <div className="">
             <img
               src={profile.avatar}
               alt=""
-              className=" rounded-full object-cover"
+              className="w-8 h-8 rounded-full object-cover"
             />
           </div>
         ) : (

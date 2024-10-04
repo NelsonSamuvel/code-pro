@@ -8,6 +8,7 @@ import { ProfilesType } from "../../services/apiProfiles";
 import { useAuth } from "../authentication/useAuth";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Input from "../../components/ui/Input";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 type PropsType = {
   profile: ProfilesType;
@@ -113,11 +114,11 @@ const ProfileForm = ({ profile }: PropsType) => {
           <div className="flex items-center gap-4">
             <label
               htmlFor="avatar"
-              className="w-max btn text-white px-2 py-1 cursor-pointer"
+              className="w-max btn text-white px-2 py-1 cursor-pointer text-center"
             >
               Choose File
             </label>
-            <p className="text-lg">{avatarState}</p>
+            <p className="text-lg w-[70%]">{avatarState}</p>
           </div>
           <input
             type="file"
@@ -148,7 +149,9 @@ const ProfileForm = ({ profile }: PropsType) => {
           />
         </FormRow>
         <FormRow>
-          <Button disabled={isUpdating}>Update</Button>
+          <Button disabled={isUpdating}>
+            {isUpdating ? <SpinnerMini /> : "Update"}
+          </Button>
         </FormRow>
       </form>
     </div>

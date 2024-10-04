@@ -11,7 +11,9 @@ export async function uploadImage(file: File[]) {
 
   const { error } = await supabase.storage
     .from("thumbnails")
-    .upload(fileName, imgFile);
+    .upload(fileName, imgFile, {
+      upsert: true,
+    });
 
   if (error) {
     console.log(error);

@@ -43,29 +43,31 @@ export default function TipsItem({
   const isStarred = isFavorite ? "fill-yellow-400 stroke-none w-6 h-6" : "";
 
   return (
-    <div className="relative rounded-md mt-4 border px-6 py-8 flex flex-col gap-4 justify-between shadow-md hover:shadow-xl hover:cursor-pointer">
-      {view === "grid" ? tip.image ? (
-        <img
-          src={tip.image}
-          alt=""
-          className="rounded-md h-[200px] object-cover"
-        />
-      ) : (
-        <div className="bg-stone-100 h-[200px] rounded-md flex items-center justify-center">
-          <HiOutlinePhotograph className="w-12 h-12 stroke-1 stroke-stone-400" />
-        </div>
-      ): null}
+    <div className="relative rounded-md mt-4 px-6 py-8 flex flex-col gap-4  shadow-md hover:shadow-xl hover:cursor-pointer">
+      {view === "grid" ? (
+        tip.image ? (
+          <img
+            src={tip.image}
+            alt=""
+            className="rounded-md h-[200px] object-cover"
+          />
+        ) : (
+          <div className="bg-stone-100 h-[200px] rounded-md flex items-center justify-center">
+            <HiOutlinePhotograph className="w-12 h-12 stroke-1 stroke-stone-400" />
+          </div>
+        )
+      ) : null}
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 mt-6">
         <div className="flex items-center gap-2 justify-between">
           <h1 className="font-semibold basis-[270px] text-lg">{title}</h1>
           <button
-            className="disabled:cursor-not-allowed self-start"
+            className="disabled:cursor-not-allowed self-start focus:outline-none focus:ring-0 focus:ring-yellow-400 focus:ring-offset-2"
             disabled={isAdding}
             onClick={() => addToFavorites(id as number)}
           >
             <HiOutlineStar
-              className={`w-5 h-5   cursor-pointer self-start ${isStarred} cursor-pointer`}
+              className={`w-6 h-6   cursor-pointer self-start ${isStarred} cursor-pointer`}
             />
           </button>
         </div>

@@ -1,4 +1,3 @@
-import { FormEvent, useEffect, useState } from "react";
 import Button from "../../components/ui/Button";
 import DropDown, { OptionType } from "../../ui/Dropdown";
 import FormRow from "../../ui/FormRow";
@@ -11,16 +10,15 @@ import { CategoriesType } from "../../services/apiCategories";
 import { onCloseProp } from "../../ui/Modal";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useEditTips } from "../myTips/useEditTips";
-import { MenuContextType } from "../../ui/Menu";
 import Input from "../../components/ui/Input";
 import Spinner from "../../ui/Spinner";
-import { HiOutlinePhoneOutgoing, HiPhotograph } from "react-icons/hi";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 type FormData = {
   title: string;
   content: string;
   category: string;
-  image: string;
+  image: FileList | string;
 };
 
 export type TipType = {
@@ -28,7 +26,7 @@ export type TipType = {
   title: string;
   content: string;
   category: string;
-  image: string;
+  image: string | undefined;
 };
 
 type TipEditType = {
@@ -38,7 +36,6 @@ type TipEditType = {
 };
 
 const defaultTipToEdit: TipType = {
-  id: undefined,
   title: "",
   content: "",
   category: "",
@@ -58,8 +55,9 @@ function AddTipsForm({
   const { updateTips, isUpdating } = useEditTips();
 
   const { id: editId, ...editValues } = tipToEdit;
-
   const isEdit = Boolean(editId);
+
+  const editImg = editValues.image;
 
   const {
     register,
@@ -91,7 +89,6 @@ function AddTipsForm({
         }
       );
     } else {
-      console.log("new tip");
       const newTip = {
         title,
         content,
@@ -119,7 +116,10 @@ function AddTipsForm({
   const thumbnail = watch("image");
   let imageName = "";
 
-  if (thumbnail && thumbnail.length > 0) {
+  if (editImg) {
+    const editArr = editImg.split("/");
+    imageName = editArr[editArr.length - 1].split("?")[0];
+  } else if (typeof thumbnail !== "string" && thumbnail?.length) {
     imageName = thumbnail[0].name;
   }
 
@@ -182,9 +182,7 @@ function AddTipsForm({
                 type="file"
                 id="tb"
                 className="hidden"
-                {...register("image", {
-                  required: "Please select a thumbnail",
-                })}
+                {...register("image")}
               />
 
               {!imageName ? (
@@ -195,7 +193,7 @@ function AddTipsForm({
                 />
               ) : (
                 <>
-                  <p>{imageName}</p>
+                  <p className="w-[70%]">{imageName}</p>
                 </>
               )}
 
@@ -212,7 +210,17 @@ function AddTipsForm({
           </FormRow>
           <FormRow>
             <Button disabled={isAdding || isUpdating}>
-              {isEdit ? "Update" : "Add"}
+              {isEdit ? (
+                isUpdating ? (
+                  <SpinnerMini />
+                ) : (
+                  "Update"
+                )
+              ) : isAdding ? (
+                <SpinnerMini />
+              ) : (
+                "Add"
+              )}
             </Button>
           </FormRow>
         </>
