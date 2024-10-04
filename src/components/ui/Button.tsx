@@ -12,7 +12,7 @@ const btnVariants = cva(
     variants: {
       variant: {
         primary: "bg-stone-900  text-white hover:bg-stone-800",
-        secondary: "border-2 font-semibold hover:bg-stone-100",
+        secondary: "border border-stone-200 font-semibold hover:bg-stone-100",
       },
     },
     defaultVariants: {

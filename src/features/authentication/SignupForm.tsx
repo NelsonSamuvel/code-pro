@@ -1,9 +1,10 @@
 import FormLayout from "../../ui/FormLayout";
 import FormRow from "../../ui/FormRow";
-import Button from "../../ui/Button";
+import Button from "../../components/ui/Button";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useSignup } from "./useSignup";
 import Input from "../../components/ui/Input";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 type FormData = {
   fullName: string;
@@ -112,7 +113,9 @@ Code pro Account 🚀"
           />
         </FormRow>
         <FormRow>
-          <Button disabled={isSigning}>Sign up</Button>
+          <Button disabled={isSigning}>
+            {isSigning ? <SpinnerMini /> : "Sign up"}
+          </Button>
         </FormRow>
       </form>
     </FormLayout>

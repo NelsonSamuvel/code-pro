@@ -1,10 +1,11 @@
+/* Container */
+.max-container {
+  @apply max-w-screen-xl mx-auto;
+}
+
 .input {
   @apply border border-slate-300 rounded-lg px-3 py-2 h-10 focus:outline-none focus:ring-1 focus:ring-stone-700 focus:ring-offset-1 focus:shadow-md
     text-stone-700;
-}
-
-.max-container {
-  @apply max-w-screen-xl mx-auto;
 }
 
 .custom-icons {
@@ -52,7 +53,7 @@
 }
 
 .grid-card {
-  @apply grid grid-cols-1 sm:grid-cols-2 gap-4 xl:grid-cols-3;
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-3;
 }
 
 .profile-img {
@@ -93,19 +94,19 @@
   @apply font-outfit text-gray-700 text-base leading-7;
 }
 
-
-.scrlBar::-webkit-scrollbar{
-  @apply w-2 h-2
+/* scrollbar */
+.scrlBar::-webkit-scrollbar {
+  @apply w-2 h-2;
 }
 
-.scrlBar::-webkit-scrollbar-track{
-  @apply bg-gray-200 cursor-pointer
+.scrlBar::-webkit-scrollbar-track {
+  @apply bg-gray-200 cursor-pointer;
 }
 
-.scrlBar::-webkit-scrollbar-thumb{
-  @apply bg-gray-500 rounded-lg cursor-pointer
+.scrlBar::-webkit-scrollbar-thumb {
+  @apply bg-gray-500 rounded-lg cursor-pointer;
 }
 
-.scrlBar::-webkit-scrollbar-thumb:hover{
+.scrlBar::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-600;
 }

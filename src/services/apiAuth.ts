@@ -58,17 +58,28 @@ export async function login({ email, password }: LoginType) {
   if (error) {
     throw new Error("Invalid Email or Password");
   }
+
+  if (!data.session) {
+    throw new Error("session not found");
+  }
+
   return data;
 }
 
 export async function checkAuth() {
-  const { data: session } = await supabase.auth.getSession();
-  if (!session.session) return null;
+  const { data: session, error: sessionErr } = await supabase.auth.getSession();
+  if (sessionErr || !session.session) {
+    console.error("session not found or sessionErr", sessionErr);
+    return null;
+  }
 
-  const { data: user, error } = await supabase.auth.getUser();
-  if (error) throw new Error("failed to get user");
+  const { data: user, error: userErr } = await supabase.auth.getUser();
+  if (userErr || !user.user) {
+    console.error("failed to get user");
+    return null;
+  }
 
-  return user.user;
+  return user?.user??null;
 }
 
 export async function logout(): Promise<void> {

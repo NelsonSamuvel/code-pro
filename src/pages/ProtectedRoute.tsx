@@ -7,15 +7,11 @@ import Spinner from "../ui/Spinner";
 import { ChildrenType } from "../types/children.type";
 
 function ProtectedRoute({ children }: ChildrenType) {
-  const navigate = useNavigate();
-
   const { isAuthenticated, isLoading } = useAuth();
 
-  useEffect(() => {
-    if (!isAuthenticated && !isLoading) navigate("/login");
-  }, [isAuthenticated, isLoading, navigate]);
+  if (isLoading) return <Spinner />;
 
-  // if (isLoading) return <Spinner />;
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
 
   if (isAuthenticated) return children;
 }

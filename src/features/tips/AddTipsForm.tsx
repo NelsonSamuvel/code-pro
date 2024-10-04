@@ -208,6 +208,7 @@ function AddTipsForm({
           <FormRow label="Choose Language" error={errors.category?.message}>
             <DropDown options={optionTypes} {...register("category")} />
           </FormRow>
+          
           <FormRow>
             <Button disabled={isAdding || isUpdating}>
               {isEdit ? (

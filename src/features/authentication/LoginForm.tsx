@@ -5,6 +5,8 @@ import FormRow from "../../ui/FormRow";
 import { useLogin } from "./useLogin";
 import FormLayout from "../../ui/FormLayout";
 import Input from "../../components/ui/Input";
+import SpinnerMini from "../../ui/SpinnerMini";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const [email, setEmail] = useState("test@gmail.com");
@@ -52,7 +54,9 @@ function LoginForm() {
           />
         </FormRow>
         <FormRow>
-          <Button>Log in</Button>
+          <Button disabled={isLoggingIn}>
+            {isLoggingIn ? <SpinnerMini /> : "Log in"}
+          </Button>
         </FormRow>
       </form>
     </FormLayout>

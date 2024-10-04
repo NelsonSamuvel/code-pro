@@ -18,7 +18,7 @@ export default function NavbarList({ handleMenu }: PropsType) {
       >
         <button className="nav-btn">Tips</button>
       </NavLink>
-      <NavLink
+      {/* <NavLink
         to="/contact"
         className={({ isActive }) =>
           isActive
@@ -27,7 +27,7 @@ export default function NavbarList({ handleMenu }: PropsType) {
         }
       >
         <button className="nav-btn">Contact</button>
-      </NavLink>
+      </NavLink> */}
       <Button
         disabled={false}
         type="secondary"

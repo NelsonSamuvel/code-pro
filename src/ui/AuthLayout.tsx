@@ -4,7 +4,7 @@ import AuthHeader from "./AuthHeader";
 
 function AuthLayout() {
   return (
-    <div className="grid grid-rows-[auto_1fr_auto] h-screen">
+    <div className="grid grid-rows-[auto_1fr_auto] sm:h-screen">
       <AuthHeader />
       <div className="flex items-center">
         <Outlet />

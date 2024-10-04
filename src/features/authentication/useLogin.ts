@@ -13,7 +13,7 @@ export function useLogin() {
       navigate("/tips", { replace: true });
     },
     onError: (err) => {
-      toast.error(err.message)
+      toast.error(err.message);
     },
   });
 
