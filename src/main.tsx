@@ -23,6 +23,7 @@ import AccountPage from "./pages/AccountPage";
 import DashboardLayout from "./ui/DashboardLayout";
 import Dashboard from "./pages/Dashboard";
 import MyTips from "./pages/MyTips";
+import Tiptap from "./components/tiptap/TipTap";
 const router = createBrowserRouter([
   {
     element: (
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/account",
         element: <AccountPage />,
+      },
+      {
+        path: "editor",
+        element: <Tiptap />,
       },
       {
         path: "*",

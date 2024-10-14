@@ -43,7 +43,7 @@ export default function TipsItem({
   const isStarred = isFavorite ? "fill-yellow-400 stroke-none w-6 h-6" : "";
 
   return (
-    <div className="relative rounded-md mt-4 px-6 py-8 flex flex-col gap-4  shadow-md hover:shadow-xl hover:cursor-pointer">
+    <div className="relative rounded-md mt-4 px-6 py-8 flex flex-col gap-4  shadow-md hover:shadow-xl">
       {view === "grid" ? (
         tip.image ? (
           <img

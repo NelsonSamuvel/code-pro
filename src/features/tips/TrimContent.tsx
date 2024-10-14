@@ -8,7 +8,7 @@ const TrimContent = ({ content }: PropsType) => {
   const trimContent = splitContent.length > 20;
 
   const spanBtn = (
-    <span className="text-sm text-blue-700 hover:underline">Show more...</span>
+    <span className="text-sm text-blue-700 hover:underline hover:cursor-pointer">Show more...</span>
   );
 
   return (

@@ -1,0 +1,11 @@
+.editor {
+  @apply outline-none;
+}
+
+.codeBlock {
+  @apply bg-stone-900 text-slate-200 py-4 px-6 overflow-x-auto;
+}
+
+.editorMenu{
+    @apply shadow-lg inline-block py-4 border rounded-md
+}
